@@ -1,9 +1,11 @@
 package com.gwell.rpc.eth.common.model;
 
+import com.gwell.rpc.eth.common.Interceptor.HttpLogger;
 import lombok.Builder;
 import okhttp3.Credentials;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import org.apache.commons.lang3.StringUtils;
 
 @Builder
@@ -53,8 +55,14 @@ public class Connection {
   }
 
   public OkHttpClient getClient() {
+    OkHttpClient.Builder builder = new OkHttpClient.Builder();
+
+    // 添加日志
+    builder.addNetworkInterceptor(
+        new HttpLoggingInterceptor(new HttpLogger()).setLevel(HttpLoggingInterceptor.Level.BODY));
+
     if (StringUtils.isNoneBlank(username, password)) {
-      return new OkHttpClient.Builder()
+      return builder
           .authenticator(
               (route, response) ->
                   response
@@ -64,6 +72,6 @@ public class Connection {
                       .build())
           .build();
     }
-    return new OkHttpClient();
+    return builder.build();
   }
 }
