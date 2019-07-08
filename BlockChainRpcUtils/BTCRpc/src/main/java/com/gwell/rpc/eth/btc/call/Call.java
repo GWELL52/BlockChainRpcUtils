@@ -2,7 +2,8 @@ package com.gwell.rpc.eth.btc.call;
 
 import com.gwell.rpc.eth.btc.call.method.BaseMethod;
 import com.gwell.rpc.eth.btc.call.method.TransferMethod;
-import com.gwell.rpc.eth.btc.model.response.BtcInfo;
+import com.gwell.rpc.eth.btc.model.response.BtcGeNewAddress;
+import com.gwell.rpc.eth.btc.model.response.BtcGetInfo;
 import com.gwell.rpc.eth.common.model.Connection;
 
 public class Call {
@@ -14,7 +15,11 @@ public class Call {
     this.transferMethod = TransferMethod.build(connection);
   }
 
-  public BtcInfo getInfo() {
+  public BtcGetInfo getInfo() {
     return baseMethod.getInfo();
+  }
+
+  public BtcGeNewAddress newAddress(String account) {
+    return baseMethod.newAddress(account);
   }
 }
