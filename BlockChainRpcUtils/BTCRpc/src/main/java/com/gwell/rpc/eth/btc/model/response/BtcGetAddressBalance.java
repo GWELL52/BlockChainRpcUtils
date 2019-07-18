@@ -1,16 +1,16 @@
 package com.gwell.rpc.eth.btc.model.response;
 
 import com.alibaba.fastjson.JSONObject;
-import com.gwell.rpc.eth.btc.model.response.result.BalanceInfo;
+import com.gwell.rpc.eth.btc.model.response.result.BtcBalanceInfo;
 import com.gwell.rpc.eth.common.model.Response;
 
 import java.math.BigDecimal;
 
-public class BtcGetAddressBalance extends Response<BalanceInfo> {
+public class BtcGetAddressBalance extends Response<BtcBalanceInfo> {
   public BtcGetAddressBalance() {}
 
-  public BalanceInfo getResult() {
-    return JSONObject.parseObject(this.getRawResult(), BalanceInfo.class);
+  public BtcBalanceInfo getResult() {
+    return JSONObject.parseObject(this.getRawResult(), BtcBalanceInfo.class);
   }
 
   public BigDecimal getBalance() {

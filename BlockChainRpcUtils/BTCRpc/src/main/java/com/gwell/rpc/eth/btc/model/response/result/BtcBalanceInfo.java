@@ -6,7 +6,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 @Data
-public class BalanceInfo {
+public class BtcBalanceInfo {
   private BigDecimal balance;
   private BigDecimal received;
 
