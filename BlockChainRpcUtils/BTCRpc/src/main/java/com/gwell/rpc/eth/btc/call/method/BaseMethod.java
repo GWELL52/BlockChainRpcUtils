@@ -5,6 +5,7 @@ import com.gwell.rpc.eth.common.model.Connection;
 import com.gwell.rpc.eth.common.model.Request;
 import lombok.NonNull;
 
+import java.math.BigInteger;
 import java.util.Collections;
 
 public class BaseMethod {
@@ -74,6 +75,69 @@ public class BaseMethod {
             "getaddressesbyaccount",
             Collections.singletonList(account),
             BtcGetAddresses.class)
+        .send();
+  }
+
+  /** 获取服务器最新高度 */
+  public BtcGetBlockCount getBlockCount() {
+    return Request.rpc(connection, "getblockcount", null, BtcGetBlockCount.class).send();
+  }
+
+  /**
+   * 根据高度或者区块哈希
+   *
+   * @param blockCount 区块高度
+   */
+  public BtcGetBlockHash getBlockHash(BigInteger blockCount) {
+    return Request.rpc(
+            connection,
+            "getblockhash",
+            Collections.singletonList(blockCount),
+            BtcGetBlockHash.class)
+        .send();
+  }
+
+  /**
+   * 根据区块哈希获取区块信息
+   *
+   * @param blockHash 区块哈希
+   */
+  public BtcGetBlockInfo getBlockInfo(String blockHash) {
+    return Request.rpc(
+            connection, "getblock", Collections.singletonList(blockHash), BtcGetBlockInfo.class)
+        .send();
+  }
+
+  /** 获取钱包中所有账号 */
+  public BtcListAccounts listAccounts() {
+    return Request.rpc(connection, "listaccounts", null, BtcListAccounts.class).send();
+  }
+
+  /**
+   * 根据账号获取总接收数值
+   *
+   * @param account 账号
+   */
+  public BtcGetReceivedInfo getReceivedByAccount(String account) {
+    return Request.rpc(
+            connection,
+            "getreceivedbyaccount",
+            Collections.singletonList(account),
+            BtcGetReceivedInfo.class)
+        .send();
+  }
+
+  /**
+   * 根据地址获取总接收数值
+   *
+   * @param address 地址(钱包管理的地址)
+   */
+  public BtcGetReceivedInfo getReceivedByAddress(String address) {
+    return Request.rpc(
+            connection,
+            "getreceivedbyaddress",
+            Collections.singletonList(address),
+            BtcGetReceivedInfo.class)
         .send();
   }
 }

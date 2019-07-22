@@ -26,10 +26,10 @@ public class BtcTransactionInfo {
   private String label;
 
   @JSONField(name = "vout")
-  private int vout;
+  private Integer vout;
 
   @JSONField(name = "confirmations")
-  private long confirmations;
+  private Long confirmations;
 
   @JSONField(name = "blockhash")
   private String blockHash;
@@ -54,4 +54,31 @@ public class BtcTransactionInfo {
 
   @JSONField(name = "bip125-replaceable")
   private String bip125Replaceable;
+
+  @JSONField(name = "details")
+  private List<Details> details;
+
+  @JSONField(name = "hex")
+  private String hex;
+
+  @Data
+  public class Details {
+    @JSONField(name = "account")
+    private String account;
+
+    @JSONField(name = "address")
+    private String address;
+
+    @JSONField(name = "category")
+    private String category;
+
+    @JSONField(name = "amount")
+    private BigDecimal amount;
+
+    @JSONField(name = "label")
+    private String label;
+
+    @JSONField(name = "vout")
+    private Integer vout;
+  }
 }

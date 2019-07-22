@@ -1,6 +1,7 @@
 package com.gwell.rpc.eth.common.model;
 
 import com.alibaba.fastjson.JSONObject;
+import com.gwell.rpc.eth.common.exception.ResponseException;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,6 +16,13 @@ public class Response<T> {
 
   public boolean hasError() {
     return error != null;
+  }
+
+  public String getRawResult() {
+    if (hasError()) {
+      ResponseException.create(error);
+    }
+    return rawResult;
   }
 
   @Getter

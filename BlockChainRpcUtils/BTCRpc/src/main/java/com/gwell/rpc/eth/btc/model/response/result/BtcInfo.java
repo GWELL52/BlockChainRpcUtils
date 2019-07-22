@@ -9,13 +9,13 @@ import java.math.BigInteger;
 @Data
 public class BtcInfo {
   @JSONField(name = "version", alternateNames = "版本")
-  private long version;
+  private Long version;
 
   @JSONField(name = "protocolversion")
-  private long protocolVersion;
+  private Long protocolVersion;
 
   @JSONField(name = "walletversion")
-  private long walletVersion;
+  private Long walletVersion;
 
   @JSONField(name = "balance")
   private BigDecimal balance;
@@ -24,25 +24,25 @@ public class BtcInfo {
   private BigInteger blocks;
 
   @JSONField(name = "timeoffset")
-  private long timeOffset;
+  private Long timeOffset;
 
   @JSONField(name = "connections")
-  private long connections;
+  private Long connections;
 
   @JSONField(name = "proxy")
   private String proxy;
 
   @JSONField(name = "difficulty")
-  private double difficulty;
+  private Double difficulty;
 
   @JSONField(name = "testnet")
-  private boolean testNet;
+  private Boolean testNet;
 
   @JSONField(name = "keypoololdest")
-  private long keyPoolOldest;
+  private Long keyPoolOldest;
 
   @JSONField(name = "keypoolsize")
-  private long keyPoolSize;
+  private Long keyPoolSize;
 
   @JSONField(name = "paytxfee")
   private BigDecimal payTxFee;

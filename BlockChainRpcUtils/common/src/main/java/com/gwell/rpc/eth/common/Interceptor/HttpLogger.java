@@ -19,7 +19,7 @@ public class HttpLogger implements HttpLoggingInterceptor.Logger {
         || (message.startsWith("[") && message.endsWith("]"))) {
       message = JsonUtil.formatJson(JsonUtil.decodeUnicode(message));
     }
-    mMessage.append(message.concat("\n"));
+    mMessage.append("| ".concat(message).concat("\n"));
     // 响应结束，打印整条日志
     if (message.startsWith("<-- END HTTP")) {
       log.info(mMessage.toString());

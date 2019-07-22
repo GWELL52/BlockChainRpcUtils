@@ -1,6 +1,7 @@
 package com.gwell.rpc.eth.common.util;
 
 public class JsonUtil {
+  private static final String PREFIX = "| ";
   /**
    * 格式化json字符串
    *
@@ -52,6 +53,7 @@ public class JsonUtil {
 
   /** 添加space */
   private static void addIndentBlank(StringBuilder sb, int indent) {
+    sb.append(PREFIX);
     for (int i = 0; i < indent; i++) {
       sb.append('\t');
     }
