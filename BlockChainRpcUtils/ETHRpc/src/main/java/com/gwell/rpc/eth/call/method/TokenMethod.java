@@ -8,10 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.web3j.abi.FunctionEncoder;
 import org.web3j.abi.FunctionReturnDecoder;
 import org.web3j.abi.TypeReference;
-import org.web3j.abi.datatypes.Address;
-import org.web3j.abi.datatypes.Bool;
-import org.web3j.abi.datatypes.Function;
-import org.web3j.abi.datatypes.Type;
+import org.web3j.abi.datatypes.*;
 import org.web3j.abi.datatypes.generated.Uint256;
 import org.web3j.abi.datatypes.generated.Uint8;
 import org.web3j.protocol.Web3j;
@@ -80,6 +77,88 @@ public class TokenMethod {
 
     Function function = new Function(methodName, inputParameters, outputParameters);
     return FunctionEncoder.encode(function);
+  }
+
+  /** 获取合约名称 */
+  @SneakyThrows
+  public String getTokenName(String contractAddress) {
+    String methodName = "name";
+
+    List<Type> inputParameters = new ArrayList<>();
+    List<TypeReference<?>> outputParameters = new ArrayList<>();
+    outputParameters.add(new TypeReference<Utf8String>() {});
+
+    Function function = new Function(methodName, inputParameters, outputParameters);
+    String data = FunctionEncoder.encode(function);
+
+    Transaction transaction =
+        Transaction.createEthCallTransaction(contractAddress, contractAddress, data);
+
+    EthCall result = web3j.ethCall(transaction, DefaultBlockParameterName.LATEST).sendAsync().get();
+    checkError(result);
+    List<Type> results =
+        FunctionReturnDecoder.decode(result.getValue(), function.getOutputParameters());
+    if (results.size() < 1) {
+      throw new RuntimeException("合约不存在!");
+    }
+    String name = results.get(0).getValue().toString();
+    return name;
+  }
+
+  /** 获取合约简称 */
+  @SneakyThrows
+  public String getTokenSymbol(String contractAddress) {
+    String methodName = "symbol";
+
+    List<Type> inputParameters = new ArrayList<>();
+    List<TypeReference<?>> outputParameters = new ArrayList<>();
+    outputParameters.add(new TypeReference<Utf8String>() {});
+
+    Function function = new Function(methodName, inputParameters, outputParameters);
+    String data = FunctionEncoder.encode(function);
+
+    Transaction transaction =
+        Transaction.createEthCallTransaction(contractAddress, contractAddress, data);
+
+    EthCall result = web3j.ethCall(transaction, DefaultBlockParameterName.LATEST).sendAsync().get();
+    checkError(result);
+    List<Type> results =
+        FunctionReturnDecoder.decode(result.getValue(), function.getOutputParameters());
+    if (results.size() < 1) {
+      throw new RuntimeException("合约不存在!");
+    }
+    String name = results.get(0).getValue().toString();
+    return name;
+  }
+
+  /** 获取合约发行总量 */
+  @SneakyThrows
+  public BigDecimal getTokenTotalSupply(String contractAddress, BigDecimal unit) {
+    String methodName = "totalSupply";
+
+    List<Type> inputParameters = new ArrayList<>();
+    List<TypeReference<?>> outputParameters = new ArrayList<>();
+    outputParameters.add(new TypeReference<Uint256>() {});
+
+    Function function = new Function(methodName, inputParameters, outputParameters);
+    String data = FunctionEncoder.encode(function);
+
+    Transaction transaction =
+        Transaction.createEthCallTransaction(contractAddress, contractAddress, data);
+
+    EthCall result = web3j.ethCall(transaction, DefaultBlockParameterName.LATEST).sendAsync().get();
+    checkError(result);
+    List<Type> results =
+        FunctionReturnDecoder.decode(result.getValue(), function.getOutputParameters());
+    if (results.size() < 1) {
+      throw new RuntimeException("合约不存在!");
+    }
+    BigDecimal totalSupply = new BigDecimal(results.get(0).getValue().toString());
+    if (unit == null) {
+      unit = getTokenUnit(contractAddress);
+    }
+    totalSupply = totalSupply.divide(unit, getTokenDecimal(unit), BigDecimal.ROUND_DOWN);
+    return totalSupply;
   }
 
   /** 获取合约精度 */

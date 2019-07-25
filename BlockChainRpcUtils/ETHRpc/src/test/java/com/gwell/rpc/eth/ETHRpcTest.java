@@ -143,8 +143,23 @@ public class ETHRpcTest extends AbstractTest {
   }
 
   @Test
+  public void getTokenName() {
+    println(rpc.getTokenName(contractAddress));
+  }
+
+  @Test
+  public void getTokenSymbol() {
+    println(rpc.getTokenSymbol(contractAddress));
+  }
+
+  @Test
+  public void getTokenTotalSupply() {
+    println(rpc.getTokenTotalSupply(contractAddress, null));
+  }
+
+  @Test
   public void getTokenDecimal() {
-      println(rpc.getTokenDecimal(contractAddress));
+    println(rpc.getTokenDecimal(contractAddress));
   }
 
   @Test

@@ -100,6 +100,21 @@ public class Call {
     return tokenMethod.getTransactionData(params);
   }
 
+  /** 获取合约名称 */
+  public String getTokenName(String contractAddress) {
+    return tokenMethod.getTokenName(contractAddress);
+  }
+
+  /** 获取合约简称 */
+  public String getTokenSymbol(String contractAddress) {
+    return tokenMethod.getTokenSymbol(contractAddress);
+  }
+
+  /** 获取合约发行总量 */
+  public BigDecimal getTokenTotalSupply(String contractAddress, BigDecimal unit) {
+    return tokenMethod.getTokenTotalSupply(contractAddress, unit);
+  }
+
   /** 获取合约精度 */
   public Integer getTokenDecimal(String contractAddress) {
     return tokenMethod.getTokenDecimal(contractAddress);
