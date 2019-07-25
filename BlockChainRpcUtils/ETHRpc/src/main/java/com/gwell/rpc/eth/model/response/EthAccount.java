@@ -1,8 +1,8 @@
 package com.gwell.rpc.eth.model.response;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.gwell.rpc.eth.ETHRpc;
 import com.gwell.rpc.common.util.FileUtil;
+import com.gwell.rpc.eth.ETHRpc;
 import lombok.Data;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;

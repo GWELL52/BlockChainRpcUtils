@@ -42,7 +42,8 @@ public abstract class HttpMethod {
     return builder.build();
   }
 
-  private okhttp3.Request getHttpRequest(Request<? extends com.gwell.rpc.common.model.Response> request) {
+  private okhttp3.Request getHttpRequest(
+      Request<? extends com.gwell.rpc.common.model.Response> request) {
     okhttp3.Request.Builder requestBuilder = new okhttp3.Request.Builder().url(getUrl(request));
     if (request.isPost()) {
       if (request.isFormData()) {

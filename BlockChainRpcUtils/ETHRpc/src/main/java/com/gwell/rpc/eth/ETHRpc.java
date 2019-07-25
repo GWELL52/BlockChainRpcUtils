@@ -1,8 +1,8 @@
 package com.gwell.rpc.eth;
 
-import com.gwell.rpc.eth.call.Call;
 import com.gwell.rpc.common.constant.Constant;
 import com.gwell.rpc.common.model.Connection;
+import com.gwell.rpc.eth.call.Call;
 import org.web3j.tx.ChainId;
 
 public class ETHRpc extends Call {

@@ -1,7 +1,6 @@
 package com.gwell.rpc.btc.call.method;
 
 import com.gwell.rpc.btc.model.response.*;
-import com.gwell.rpc.eth.btc.model.response.*;
 import com.gwell.rpc.common.model.Connection;
 import com.gwell.rpc.common.model.Request;
 import org.apache.commons.lang3.StringUtils;

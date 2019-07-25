@@ -1,9 +1,8 @@
 package com.gwell.rpc.btc.call;
 
-import com.gwell.rpc.btc.model.response.*;
 import com.gwell.rpc.btc.call.method.BaseMethod;
 import com.gwell.rpc.btc.call.method.TransferMethod;
-import com.gwell.rpc.eth.btc.model.response.*;
+import com.gwell.rpc.btc.model.response.*;
 import com.gwell.rpc.common.model.Connection;
 
 import java.math.BigDecimal;
