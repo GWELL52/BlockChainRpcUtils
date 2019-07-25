@@ -6,7 +6,7 @@ import lombok.Data;
 import java.math.BigInteger;
 
 @Data
-public class BtcUTXOInfo {
+public class UTXOInfo {
   @JSONField(name = "address")
   private String address;
 

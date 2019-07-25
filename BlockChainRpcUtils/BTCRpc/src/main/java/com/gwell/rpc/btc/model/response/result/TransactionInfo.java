@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-public class BtcTransactionInfo {
+public class TransactionInfo {
   @JSONField(name = "account")
   private String account;
 

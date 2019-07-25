@@ -17,75 +17,75 @@ public class Call {
     this.transferMethod = TransferMethod.build(connection);
   }
 
-  public BtcGetInfo getInfo() {
+  public GetInfo getInfo() {
     return baseMethod.getInfo();
   }
 
-  public BtcGetNewAddress getNewAddress(String account) {
+  public GetNewAddress getNewAddress(String account) {
     return baseMethod.getNewAddress(account);
   }
 
-  public BtcGetBalance getBalance(String account) {
+  public GetBalance getBalance(String account) {
     return baseMethod.getBalance(account);
   }
 
-  public BtcGetAddressBalance getAddressBalance(String address) {
+  public GetAddressBalance getAddressBalance(String address) {
     return baseMethod.getAddressBalance(address);
   }
 
-  public BtcGetAddresses getAddressesByAccount(String account) {
+  public GetAddresses getAddressesByAccount(String account) {
     return baseMethod.getAddressesByAccount(account);
   }
 
-  public BtcListTransactions listTransactions(String account, Long limit, Long index) {
+  public ListTransactions listTransactions(String account, Long limit, Long index) {
     return transferMethod.listTransactions(account, limit, index);
   }
 
-  public BtcSendTransaction sendToAddress(String toAddress, BigDecimal amount) {
+  public SendTransaction sendToAddress(String toAddress, BigDecimal amount) {
     return transferMethod.sendToAddress(toAddress, amount);
   }
 
-  public BtcGetBlockCount getBlockCount() {
+  public GetBlockCount getBlockCount() {
     return baseMethod.getBlockCount();
   }
 
-  public BtcGetBlockHash getBlockHash(BigInteger blockCount) {
+  public GetBlockHash getBlockHash(BigInteger blockCount) {
     return baseMethod.getBlockHash(blockCount);
   }
 
-  public BtcGetBlockInfo getBlockInfo(String blockHash) {
+  public GetBlockInfo getBlockInfo(String blockHash) {
     return baseMethod.getBlockInfo(blockHash);
   }
 
-  public BtcGetTransactionInfo getTransactionInfo(String hash) {
+  public GetTransactionInfo getTransactionInfo(String hash) {
     return transferMethod.getTransactionInfo(hash);
   }
 
-  public BtcGetRawTransactionInfo getRawTransactionInfo(String hash) {
+  public GetRawTransactionInfo getRawTransactionInfo(String hash) {
     return transferMethod.getRawTransactionInfo(hash);
   }
 
-  public BtcListAccounts listAccounts() {
+  public ListAccounts listAccounts() {
     return baseMethod.listAccounts();
   }
 
-  public BtcGetReceivedInfo getReceivedByAccount(String account) {
+  public GetReceivedInfo getReceivedByAccount(String account) {
     return baseMethod.getReceivedByAccount(account);
   }
 
-  public BtcGetReceivedInfo getReceivedByAddress(String address) {
+  public GetReceivedInfo getReceivedByAddress(String address) {
     return baseMethod.getReceivedByAddress(address);
   }
 
-  public BtcSendTransaction sendRawTransaction(String rawData) {
+  public SendTransaction sendRawTransaction(String rawData) {
     return transferMethod.sendRawTransaction(rawData);
   }
 
-  public BtcGetAddressUTXOs getAddressUnspentOutputs(String address) {
+  public GetAddressUTXOs getAddressUnspentOutputs(String address) {
     return transferMethod.getAddressUnspentOutputs(address);
   }
 
-  public BtcGetAddressAllHash getAddressAllHash(String address) {
+  public GetAddressAllHash getAddressAllHash(String address) {
     return transferMethod.getAddressAllHash(address);
   }
 }

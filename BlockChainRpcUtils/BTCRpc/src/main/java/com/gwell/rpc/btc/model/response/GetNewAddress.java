@@ -2,10 +2,10 @@ package com.gwell.rpc.btc.model.response;
 
 import com.gwell.rpc.common.model.Response;
 
-public class BtcGetBlockHash extends Response<String> {
-  public BtcGetBlockHash() {}
+public class GetNewAddress extends Response<String> {
+  public GetNewAddress() {}
 
-  public String getBlockHash() {
+  public String getAddress() {
     return this.getRawResult();
   }
 }

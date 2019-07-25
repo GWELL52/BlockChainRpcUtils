@@ -1,8 +1,8 @@
 package com.gwell.rpc.btc;
 
 import com.alibaba.fastjson.JSON;
-import com.gwell.rpc.btc.model.response.BtcGetInfo;
-import com.gwell.rpc.btc.model.response.BtcListAccounts;
+import com.gwell.rpc.btc.model.response.GetInfo;
+import com.gwell.rpc.btc.model.response.ListAccounts;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -18,7 +18,7 @@ public class BTCRpcTest extends AbstractTest {
 
   @Test
   public void getInfo() {
-    BtcGetInfo result = rpc.getInfo();
+    GetInfo result = rpc.getInfo();
     println(result.getInfo());
   }
 
@@ -88,7 +88,7 @@ public class BTCRpcTest extends AbstractTest {
 
   @Test
   public void listAccounts() {
-    BtcListAccounts result = rpc.listAccounts();
+    ListAccounts result = rpc.listAccounts();
     println(result.getAccountMap());
     println(result.getAccountList());
   }

@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-public class BtcBlockInfo {
+public class BlockInfo {
   @JSONField(name = "hash")
   private String hash;
 

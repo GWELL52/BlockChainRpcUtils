@@ -20,8 +20,8 @@ public class BaseMethod {
   }
 
   /** 获取服务器版本余额信息 */
-  public BtcGetInfo getInfo() {
-    return Request.rpc(connection, "getinfo", null, BtcGetInfo.class).send();
+  public GetInfo getInfo() {
+    return Request.rpc(connection, "getinfo", null, GetInfo.class).send();
   }
 
   /**
@@ -29,9 +29,9 @@ public class BaseMethod {
    *
    * @param account 备注账号名
    */
-  public BtcGetNewAddress getNewAddress(String account) {
+  public GetNewAddress getNewAddress(String account) {
     return Request.rpc(
-            connection, "getnewaddress", Collections.singletonList(account), BtcGetNewAddress.class)
+            connection, "getnewaddress", Collections.singletonList(account), GetNewAddress.class)
         .send();
   }
 
@@ -40,12 +40,12 @@ public class BaseMethod {
    *
    * @param account 账号
    */
-  public BtcGetBalance getBalance(String account) {
+  public GetBalance getBalance(String account) {
     return Request.rpc(
             connection,
             "getbalance",
             account == null ? null : Collections.singletonList(account),
-            BtcGetBalance.class)
+            GetBalance.class)
         .send();
   }
 
@@ -54,12 +54,12 @@ public class BaseMethod {
    *
    * @param address 地址
    */
-  public BtcGetAddressBalance getAddressBalance(@NonNull String address) {
+  public GetAddressBalance getAddressBalance(@NonNull String address) {
     return Request.rpc(
             connection,
             "getaddressbalance",
             Collections.singletonList(address),
-            BtcGetAddressBalance.class)
+            GetAddressBalance.class)
         .send();
   }
 
@@ -69,18 +69,18 @@ public class BaseMethod {
    * @param account 账号
    * @return List 地址集合
    */
-  public BtcGetAddresses getAddressesByAccount(@NonNull String account) {
+  public GetAddresses getAddressesByAccount(@NonNull String account) {
     return Request.rpc(
             connection,
             "getaddressesbyaccount",
             Collections.singletonList(account),
-            BtcGetAddresses.class)
+            GetAddresses.class)
         .send();
   }
 
   /** 获取服务器最新高度 */
-  public BtcGetBlockCount getBlockCount() {
-    return Request.rpc(connection, "getblockcount", null, BtcGetBlockCount.class).send();
+  public GetBlockCount getBlockCount() {
+    return Request.rpc(connection, "getblockcount", null, GetBlockCount.class).send();
   }
 
   /**
@@ -88,12 +88,12 @@ public class BaseMethod {
    *
    * @param blockCount 区块高度
    */
-  public BtcGetBlockHash getBlockHash(BigInteger blockCount) {
+  public GetBlockHash getBlockHash(BigInteger blockCount) {
     return Request.rpc(
             connection,
             "getblockhash",
             Collections.singletonList(blockCount),
-            BtcGetBlockHash.class)
+            GetBlockHash.class)
         .send();
   }
 
@@ -102,15 +102,15 @@ public class BaseMethod {
    *
    * @param blockHash 区块哈希
    */
-  public BtcGetBlockInfo getBlockInfo(String blockHash) {
+  public GetBlockInfo getBlockInfo(String blockHash) {
     return Request.rpc(
-            connection, "getblock", Collections.singletonList(blockHash), BtcGetBlockInfo.class)
+            connection, "getblock", Collections.singletonList(blockHash), GetBlockInfo.class)
         .send();
   }
 
   /** 获取钱包中所有账号 */
-  public BtcListAccounts listAccounts() {
-    return Request.rpc(connection, "listaccounts", null, BtcListAccounts.class).send();
+  public ListAccounts listAccounts() {
+    return Request.rpc(connection, "listaccounts", null, ListAccounts.class).send();
   }
 
   /**
@@ -118,12 +118,12 @@ public class BaseMethod {
    *
    * @param account 账号
    */
-  public BtcGetReceivedInfo getReceivedByAccount(String account) {
+  public GetReceivedInfo getReceivedByAccount(String account) {
     return Request.rpc(
             connection,
             "getreceivedbyaccount",
             Collections.singletonList(account),
-            BtcGetReceivedInfo.class)
+            GetReceivedInfo.class)
         .send();
   }
 
@@ -132,12 +132,12 @@ public class BaseMethod {
    *
    * @param address 地址(钱包管理的地址)
    */
-  public BtcGetReceivedInfo getReceivedByAddress(String address) {
+  public GetReceivedInfo getReceivedByAddress(String address) {
     return Request.rpc(
             connection,
             "getreceivedbyaddress",
             Collections.singletonList(address),
-            BtcGetReceivedInfo.class)
+            GetReceivedInfo.class)
         .send();
   }
 }

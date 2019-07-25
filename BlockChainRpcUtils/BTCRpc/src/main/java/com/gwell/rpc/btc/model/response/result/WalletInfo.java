@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 @Data
-public class BtcInfo {
+public class WalletInfo {
   @JSONField(name = "version", alternateNames = "版本")
   private Long version;
 

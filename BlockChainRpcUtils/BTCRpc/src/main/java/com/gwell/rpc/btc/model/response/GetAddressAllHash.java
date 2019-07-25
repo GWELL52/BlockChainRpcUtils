@@ -5,10 +5,10 @@ import com.gwell.rpc.common.model.Response;
 
 import java.util.List;
 
-public class BtcGetAddresses extends Response<List<String>> {
-  public BtcGetAddresses() {}
+public class GetAddressAllHash extends Response<List<String>> {
+  public GetAddressAllHash() {}
 
-  public List<String> getAddressList() {
+  public List<String> getHashList() {
     return JSONArray.parseArray(this.getRawResult(), String.class);
   }
 }

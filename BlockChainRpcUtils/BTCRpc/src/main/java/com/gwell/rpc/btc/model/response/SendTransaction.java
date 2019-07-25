@@ -2,10 +2,10 @@ package com.gwell.rpc.btc.model.response;
 
 import com.gwell.rpc.common.model.Response;
 
-public class BtcGetNewAddress extends Response<String> {
-  public BtcGetNewAddress() {}
+public class SendTransaction extends Response<String> {
+  public SendTransaction() {}
 
-  public String getAddress() {
+  public String getHash() {
     return this.getRawResult();
   }
 }

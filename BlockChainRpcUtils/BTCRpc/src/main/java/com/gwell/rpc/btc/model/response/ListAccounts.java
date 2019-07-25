@@ -5,8 +5,8 @@ import com.gwell.rpc.common.model.Response;
 
 import java.util.Set;
 
-public class BtcListAccounts extends Response<JSONObject> {
-  public BtcListAccounts() {}
+public class ListAccounts extends Response<JSONObject> {
+  public ListAccounts() {}
 
   public JSONObject getAccountMap() {
     return JSONObject.parseObject(this.getRawResult());

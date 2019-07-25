@@ -4,8 +4,8 @@ import com.gwell.rpc.common.model.Response;
 
 import java.math.BigInteger;
 
-public class BtcGetBlockCount extends Response<BigInteger> {
-  public BtcGetBlockCount() {}
+public class GetBlockCount extends Response<BigInteger> {
+  public GetBlockCount() {}
 
   public BigInteger getBlockCount() {
     return new BigInteger(this.getRawResult());

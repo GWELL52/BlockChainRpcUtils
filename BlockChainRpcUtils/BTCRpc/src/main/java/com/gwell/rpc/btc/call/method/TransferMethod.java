@@ -28,7 +28,7 @@ public class TransferMethod {
    * @param limit 限制结果大小 default=1000
    * @param index 起始下标 default=0
    */
-  public BtcListTransactions listTransactions(String account, Long limit, Long index) {
+  public ListTransactions listTransactions(String account, Long limit, Long index) {
     if (StringUtils.isBlank(account)) {
       account = "*";
     }
@@ -42,17 +42,17 @@ public class TransferMethod {
             connection,
             "listtransactions",
             Arrays.asList(account, limit, index),
-            BtcListTransactions.class)
+            ListTransactions.class)
         .send();
   }
 
   /** 根据哈希获取交易信息 */
-  public BtcGetTransactionInfo getTransactionInfo(String hash) {
+  public GetTransactionInfo getTransactionInfo(String hash) {
     return Request.rpc(
             connection,
             "gettransaction",
             Collections.singletonList(hash),
-            BtcGetTransactionInfo.class)
+            GetTransactionInfo.class)
         .send();
   }
 
@@ -61,9 +61,9 @@ public class TransferMethod {
    *
    * @param hash 交易哈希
    */
-  public BtcGetRawTransactionInfo getRawTransactionInfo(String hash) {
+  public GetRawTransactionInfo getRawTransactionInfo(String hash) {
     return Request.rpc(
-            connection, "getrawtransaction", Arrays.asList(hash, 1), BtcGetRawTransactionInfo.class)
+            connection, "getrawtransaction", Arrays.asList(hash, 1), GetRawTransactionInfo.class)
         .send();
   }
 
@@ -73,39 +73,39 @@ public class TransferMethod {
    * @param toAddress 接收地址
    * @param amount 数量
    */
-  public BtcSendTransaction sendToAddress(String toAddress, BigDecimal amount) {
+  public SendTransaction sendToAddress(String toAddress, BigDecimal amount) {
     return Request.rpc(
-            connection, "sendtoaddress", Arrays.asList(toAddress, amount), BtcSendTransaction.class)
+            connection, "sendtoaddress", Arrays.asList(toAddress, amount), SendTransaction.class)
         .send();
   }
 
   /** 发送已经签名的交易数据 */
-  public BtcSendTransaction sendRawTransaction(String rawData) {
+  public SendTransaction sendRawTransaction(String rawData) {
     return Request.rpc(
             connection,
             "sendrawtransaction",
             Collections.singletonList(rawData),
-            BtcSendTransaction.class)
+            SendTransaction.class)
         .send();
   }
 
   /** 根据地址获取未消费的交易输出 unspent tx outputs(UTXOs) */
-  public BtcGetAddressUTXOs getAddressUnspentOutputs(String address) {
+  public GetAddressUTXOs getAddressUnspentOutputs(String address) {
     return Request.rpc(
             connection,
             "getaddressutxos",
             Collections.singletonList(address),
-            BtcGetAddressUTXOs.class)
+            GetAddressUTXOs.class)
         .send();
   }
 
   /** 根据地址获取所有的交易hash */
-  public BtcGetAddressAllHash getAddressAllHash(String address) {
+  public GetAddressAllHash getAddressAllHash(String address) {
     return Request.rpc(
             connection,
             "getaddresstxids",
             Collections.singletonList(address),
-            BtcGetAddressAllHash.class)
+            GetAddressAllHash.class)
         .send();
   }
 }

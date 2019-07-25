@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-public class BtcRawTransactionInfo {
+public class RawTransactionInfo {
   @JSONField(name = "hex")
   private String hex;
 
