@@ -11,10 +11,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 @RunWith(JUnit4.class)
-public class BTCRpcTest {
-  private BTCRpc rpc = BTCRpc.build("192.168.1.232", 20001, "bitcorehot", "uCV2Masdf9");
-  //  private BTCRpc rpc = BTCRpc.build("", 0, "", "");
-
+public class BTCRpcTest extends AbstractTest {
   private void println(Object object) {
     System.out.println(JSON.toJSONString(object));
   }
