@@ -22,6 +22,7 @@ public class Call {
   private BalanceMethod balanceMethod;
   private TokenMethod tokenMethod;
   private TransferMethod transferMethod;
+  private TransactionInfoMethod transactionInfoMethod;
 
   public Call(Connection connection, byte chainId, String keystorePath) {
     Web3j web3j =
@@ -31,6 +32,7 @@ public class Call {
     this.balanceMethod = BalanceMethod.build(web3j);
     this.tokenMethod = TokenMethod.build(web3j);
     this.transferMethod = TransferMethod.build(web3j, chainId);
+    this.transactionInfoMethod = TransactionInfoMethod.build(web3j);
   }
 
   /* 基础方法 */
@@ -62,17 +64,17 @@ public class Call {
   /* 交易信息相关方法 */
   /** 根据Hash获取交易 */
   public Transaction getTransactionByHash(String hash) {
-    return baseMethod.getTransactionByHash(hash);
+    return transactionInfoMethod.getTransactionByHash(hash);
   }
 
   /** 已确认的交易详情 */
   public TransactionReceipt getTransactionReceipt(String hash) {
-    return baseMethod.getTransactionReceipt(hash);
+    return transactionInfoMethod.getTransactionReceipt(hash);
   }
 
   /** 获取交易详情 */
   public ETHTransactionInfo getTransactionAllInfo(String hash, boolean getTransferTime) {
-    return baseMethod.getTransactionAllInfo(hash, getTransferTime);
+    return transactionInfoMethod.getTransactionAllInfo(hash, getTransferTime);
   }
 
   /* 账号相关方法 */

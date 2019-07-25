@@ -143,6 +143,11 @@ public class ETHRpcTest extends AbstractTest {
   }
 
   @Test
+  public void getTokenDecimal() {
+      println(rpc.getTokenDecimal(contractAddress));
+  }
+
+  @Test
   public void getTokenUnit() {
     BigDecimal unit = rpc.getTokenUnit(contractAddress);
     println("unit ==> " + unit);

@@ -1,7 +1,6 @@
 package com.gwell.rpc.btc.call;
 
-import com.gwell.rpc.btc.call.method.BaseMethod;
-import com.gwell.rpc.btc.call.method.TransferMethod;
+import com.gwell.rpc.btc.call.method.*;
 import com.gwell.rpc.btc.model.response.*;
 import com.gwell.rpc.common.model.Connection;
 
@@ -10,11 +9,17 @@ import java.math.BigInteger;
 
 public class Call {
   private BaseMethod baseMethod;
+  private AccountMethod accountMethod;
+  private BalanceMethod balanceMethod;
   private TransferMethod transferMethod;
+  private TransactionInfoMethod transactionInfoMethod;
 
   public Call(Connection connection) {
     this.baseMethod = BaseMethod.build(connection);
+    this.accountMethod = AccountMethod.build(connection);
+    this.balanceMethod = BalanceMethod.build(connection);
     this.transferMethod = TransferMethod.build(connection);
+    this.transactionInfoMethod = TransactionInfoMethod.build(connection);
   }
 
   public GetInfo getInfo() {
@@ -22,23 +27,23 @@ public class Call {
   }
 
   public GetNewAddress getNewAddress(String account) {
-    return baseMethod.getNewAddress(account);
+    return accountMethod.getNewAddress(account);
   }
 
   public GetBalance getBalance(String account) {
-    return baseMethod.getBalance(account);
+    return balanceMethod.getBalance(account);
   }
 
   public GetAddressBalance getAddressBalance(String address) {
-    return baseMethod.getAddressBalance(address);
+    return balanceMethod.getAddressBalance(address);
   }
 
   public GetAddresses getAddressesByAccount(String account) {
-    return baseMethod.getAddressesByAccount(account);
+    return accountMethod.getAddressesByAccount(account);
   }
 
   public ListTransactions listTransactions(String account, Long limit, Long index) {
-    return transferMethod.listTransactions(account, limit, index);
+    return transactionInfoMethod.listTransactions(account, limit, index);
   }
 
   public SendTransaction sendToAddress(String toAddress, BigDecimal amount) {
@@ -58,23 +63,23 @@ public class Call {
   }
 
   public GetTransactionInfo getTransactionInfo(String hash) {
-    return transferMethod.getTransactionInfo(hash);
+    return transactionInfoMethod.getTransactionInfo(hash);
   }
 
   public GetRawTransactionInfo getRawTransactionInfo(String hash) {
-    return transferMethod.getRawTransactionInfo(hash);
+    return transactionInfoMethod.getRawTransactionInfo(hash);
   }
 
   public ListAccounts listAccounts() {
-    return baseMethod.listAccounts();
+    return accountMethod.listAccounts();
   }
 
   public GetReceivedInfo getReceivedByAccount(String account) {
-    return baseMethod.getReceivedByAccount(account);
+    return balanceMethod.getReceivedByAccount(account);
   }
 
   public GetReceivedInfo getReceivedByAddress(String address) {
-    return baseMethod.getReceivedByAddress(address);
+    return balanceMethod.getReceivedByAddress(address);
   }
 
   public SendTransaction sendRawTransaction(String rawData) {
@@ -82,10 +87,10 @@ public class Call {
   }
 
   public GetAddressUTXOs getAddressUnspentOutputs(String address) {
-    return transferMethod.getAddressUnspentOutputs(address);
+    return balanceMethod.getAddressUnspentOutputs(address);
   }
 
   public GetAddressAllHash getAddressAllHash(String address) {
-    return transferMethod.getAddressAllHash(address);
+    return transactionInfoMethod.getAddressAllHash(address);
   }
 }
