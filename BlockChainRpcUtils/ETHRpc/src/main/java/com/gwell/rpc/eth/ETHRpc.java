@@ -1,6 +1,7 @@
 package com.gwell.rpc.eth;
 
 import com.gwell.rpc.common.constant.Constant;
+import com.gwell.rpc.common.enums.BlockChainEnum;
 import com.gwell.rpc.common.model.Connection;
 import com.gwell.rpc.eth.call.Call;
 import org.web3j.tx.ChainIdLong;
@@ -34,7 +35,7 @@ public class ETHRpc extends Call {
   }
 
   private ETHRpc(Connection connection, long chainId, String keystorePath) {
-    super(connection, chainId, keystorePath);
+    super(connection, chainId, keystorePath, BlockChainEnum.ETH);
     ETHRpc.keystorePath = keystorePath;
   }
 }

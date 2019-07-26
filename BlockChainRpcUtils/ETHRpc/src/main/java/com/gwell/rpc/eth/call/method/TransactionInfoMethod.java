@@ -1,10 +1,10 @@
 package com.gwell.rpc.eth.call.method;
 
 import com.gwell.rpc.common.exception.ResponseException;
+import com.gwell.rpc.eth.call.override.Web3j;
 import com.gwell.rpc.eth.model.response.ETHTransactionInfo;
 import lombok.Setter;
 import lombok.SneakyThrows;
-import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.Response;
 import org.web3j.protocol.core.methods.response.*;
 
@@ -57,9 +57,21 @@ public class TransactionInfoMethod {
   }
 
   /** 获取交易详情 */
+  @SneakyThrows
   public ETHTransactionInfo getTransactionAllInfo(String hash, boolean getTransferTime) {
-    ETHTransactionInfo result =
-        new ETHTransactionInfo(getTransactionByHash(hash), getTransactionReceipt(hash));
+    EthTransaction ethTransaction = web3j.ethGetTransactionByHash(hash).send();
+    Transaction transaction = null;
+    if (!ethTransaction.hasError()) {
+      transaction = ethTransaction.getTransaction().orElse(null);
+    }
+
+    EthGetTransactionReceipt ethGetTransactionReceipt = web3j.ethGetTransactionReceipt(hash).send();
+    TransactionReceipt transactionReceipt = null;
+    if (!ethGetTransactionReceipt.hasError()) {
+      transactionReceipt = ethGetTransactionReceipt.getTransactionReceipt().orElse(null);
+    }
+
+    ETHTransactionInfo result = new ETHTransactionInfo(transaction, transactionReceipt);
     if (!result.isPending() && getTransferTime) {
       EthBlock.Block block = baseMethod.getBlockInfo(result.getBlockNumber(), false);
       // 完成交易时间

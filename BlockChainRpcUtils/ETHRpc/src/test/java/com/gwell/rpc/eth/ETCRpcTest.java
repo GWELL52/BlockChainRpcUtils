@@ -25,12 +25,6 @@ public class ETCRpcTest extends AbstractTest {
         from.getAddress(), from.getPassword(), to.getAddress());
   }
 
-  private SendTransactionParams sendToken(
-      EthAccount from, EthAccount to, BigDecimal amount, String contract) {
-    return SendTransactionParams.createTokenTransaction(
-        from.getAddress(), from.getPassword(), to.getAddress(), amount, contract);
-  }
-
   private void println(Object object) {
     System.out.println(JSON.toJSONString(object));
   }
@@ -60,8 +54,6 @@ public class ETCRpcTest extends AbstractTest {
   public void getGasLimit() {
     println("ALL ETC ==> " + etcRpc.getGasLimit(sendAllEtc(from, to)));
     println("ETC ==> " + etcRpc.getGasLimit(sendEtc(from, to, BigDecimal.ONE)));
-    println(
-        "TOKEN ==> " + etcRpc.getGasLimit(sendToken(from, to, BigDecimal.ONE, contractAddress)));
   }
 
   @Test
@@ -71,11 +63,6 @@ public class ETCRpcTest extends AbstractTest {
             + JSON.toJSONString(
                 etcRpc.getTransactionByHash(
                     "0x2e57b37e0348920718ada744c586ba1b60cac4b3801709cbb1ae2fae85dbafb7")));
-    println(
-        "TOKEN ==> "
-            + JSON.toJSONString(
-                etcRpc.getTransactionByHash(
-                    "0x6ea883b225c8c331d37418c8bf6b948e4449c59c782415a37d3e0190c4b6d1ce")));
   }
 
   @Test
@@ -85,11 +72,6 @@ public class ETCRpcTest extends AbstractTest {
             + JSON.toJSONString(
                 etcRpc.getTransactionReceipt(
                     "0x2e57b37e0348920718ada744c586ba1b60cac4b3801709cbb1ae2fae85dbafb7")));
-    println(
-        "TOKEN ==> "
-            + JSON.toJSONString(
-                etcRpc.getTransactionReceipt(
-                    "0x6ea883b225c8c331d37418c8bf6b948e4449c59c782415a37d3e0190c4b6d1ce")));
   }
 
   @Test
@@ -104,16 +86,6 @@ public class ETCRpcTest extends AbstractTest {
             + JSON.toJSONString(
                 etcRpc.getTransactionAllInfo(
                     "0x2e57b37e0348920718ada744c586ba1b60cac4b3801709cbb1ae2fae85dbafb7", true)));
-    println(
-        "TOKEN - [getTransferTime=false] ==> "
-            + JSON.toJSONString(
-                etcRpc.getTransactionAllInfo(
-                    "0x6ea883b225c8c331d37418c8bf6b948e4449c59c782415a37d3e0190c4b6d1ce", false)));
-    println(
-        "TOKEN - [getTransferTime=true] ==> "
-            + JSON.toJSONString(
-                etcRpc.getTransactionAllInfo(
-                    "0x6ea883b225c8c331d37418c8bf6b948e4449c59c782415a37d3e0190c4b6d1ce", true)));
   }
 
   @Test
@@ -129,44 +101,37 @@ public class ETCRpcTest extends AbstractTest {
   @Test
   public void getBalance() {
     println("ETC ==> " + etcRpc.getBalance(BalanceParams.createEthBalance(from.getAddress())));
-    println(
-        "TOKEN ==> "
-            + etcRpc.getBalance(
-                BalanceParams.createTokenBalance(from.getAddress(), contractAddress)));
   }
 
   @Test
   public void getTransactionData() {
     println("ALL ETC ==> " + etcRpc.getTransactionData(sendAllEtc(from, to)));
     println("ETC ==> " + etcRpc.getTransactionData(sendEtc(from, to, BigDecimal.ONE)));
-    println(
-        "TOKEN ==> "
-            + etcRpc.getTransactionData(sendToken(from, to, BigDecimal.ONE, contractAddress)));
   }
 
   @Test
   public void getTokenName() {
-    println(etcRpc.getTokenName(contractAddress));
+    println(etcRpc.getTokenName(etcContractAddress));
   }
 
   @Test
   public void getTokenSymbol() {
-    println(etcRpc.getTokenSymbol(contractAddress));
+    println(etcRpc.getTokenSymbol(etcContractAddress));
   }
 
   @Test
   public void getTokenTotalSupply() {
-    println(etcRpc.getTokenTotalSupply(contractAddress, null));
+    println(etcRpc.getTokenTotalSupply(etcContractAddress, null));
   }
 
   @Test
   public void getTokenDecimal() {
-    println(etcRpc.getTokenDecimal(contractAddress));
+    println(etcRpc.getTokenDecimal(etcContractAddress));
   }
 
   @Test
   public void getTokenUnit() {
-    BigDecimal unit = etcRpc.getTokenUnit(contractAddress);
+    BigDecimal unit = etcRpc.getTokenUnit(etcContractAddress);
     println("unit ==> " + unit);
     println("decimal ==> " + TokenMethod.getTokenDecimal(unit));
   }
@@ -175,18 +140,12 @@ public class ETCRpcTest extends AbstractTest {
   public void getTransactionFee() {
     println("ALL ETC ==> " + etcRpc.getTransactionFee(sendAllEtc(from, to)));
     println("ETC ==> " + etcRpc.getTransactionFee(sendEtc(from, to, BigDecimal.ONE)));
-    println(
-        "TOKEN ==> "
-            + etcRpc.getTransactionFee(sendToken(from, to, BigDecimal.ONE, contractAddress)));
   }
 
   @Test
   public void signTransaction() {
     println("ALL ETC ==> " + etcRpc.signTransaction(sendAllEtc(from, to)));
     println("ETC ==> " + etcRpc.signTransaction(sendEtc(from, to, BigDecimal.ONE)));
-    println(
-        "TOKEN ==> "
-            + etcRpc.signTransaction(sendToken(from, to, BigDecimal.ONE, contractAddress)));
   }
 
   @Test
@@ -197,12 +156,11 @@ public class ETCRpcTest extends AbstractTest {
   @Test
   public void sendTransaction() {
     println(etcRpc.sendTransaction(sendEtc(from, to, BigDecimal.ONE)));
-    println(etcRpc.sendTransaction(sendToken(from, to, BigDecimal.ONE, contractAddress)));
   }
 
   @Test
   public void sendRawTransaction() {
-    String signData = etcRpc.signTransaction(sendToken(from, to, BigDecimal.ONE, contractAddress));
+    String signData = etcRpc.signTransaction(sendEtc(from, to, BigDecimal.ONE));
     println(etcRpc.sendRawTransaction(signData));
   }
 }

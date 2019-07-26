@@ -61,7 +61,7 @@ public class ETHRpcTest extends AbstractTest {
     println("ALL ETH ==> " + ethRpc.getGasLimit(sendAllEth(from, to)));
     println("ETH ==> " + ethRpc.getGasLimit(sendEth(from, to, BigDecimal.ONE)));
     println(
-        "TOKEN ==> " + ethRpc.getGasLimit(sendToken(from, to, BigDecimal.ONE, contractAddress)));
+        "TOKEN ==> " + ethRpc.getGasLimit(sendToken(from, to, BigDecimal.ONE, ethContractAddress)));
   }
 
   @Test
@@ -132,7 +132,7 @@ public class ETHRpcTest extends AbstractTest {
     println(
         "TOKEN ==> "
             + ethRpc.getBalance(
-                BalanceParams.createTokenBalance(from.getAddress(), contractAddress)));
+                BalanceParams.createTokenBalance(from.getAddress(), ethContractAddress)));
   }
 
   @Test
@@ -141,32 +141,32 @@ public class ETHRpcTest extends AbstractTest {
     println("ETH ==> " + ethRpc.getTransactionData(sendEth(from, to, BigDecimal.ONE)));
     println(
         "TOKEN ==> "
-            + ethRpc.getTransactionData(sendToken(from, to, BigDecimal.ONE, contractAddress)));
+            + ethRpc.getTransactionData(sendToken(from, to, BigDecimal.ONE, ethContractAddress)));
   }
 
   @Test
   public void getTokenName() {
-    println(ethRpc.getTokenName(contractAddress));
+    println(ethRpc.getTokenName(ethContractAddress));
   }
 
   @Test
   public void getTokenSymbol() {
-    println(ethRpc.getTokenSymbol(contractAddress));
+    println(ethRpc.getTokenSymbol(ethContractAddress));
   }
 
   @Test
   public void getTokenTotalSupply() {
-    println(ethRpc.getTokenTotalSupply(contractAddress, null));
+    println(ethRpc.getTokenTotalSupply(ethContractAddress, null));
   }
 
   @Test
   public void getTokenDecimal() {
-    println(ethRpc.getTokenDecimal(contractAddress));
+    println(ethRpc.getTokenDecimal(ethContractAddress));
   }
 
   @Test
   public void getTokenUnit() {
-    BigDecimal unit = ethRpc.getTokenUnit(contractAddress);
+    BigDecimal unit = ethRpc.getTokenUnit(ethContractAddress);
     println("unit ==> " + unit);
     println("decimal ==> " + TokenMethod.getTokenDecimal(unit));
   }
@@ -177,7 +177,7 @@ public class ETHRpcTest extends AbstractTest {
     println("ETH ==> " + ethRpc.getTransactionFee(sendEth(from, to, BigDecimal.ONE)));
     println(
         "TOKEN ==> "
-            + ethRpc.getTransactionFee(sendToken(from, to, BigDecimal.ONE, contractAddress)));
+            + ethRpc.getTransactionFee(sendToken(from, to, BigDecimal.ONE, ethContractAddress)));
   }
 
   @Test
@@ -186,23 +186,24 @@ public class ETHRpcTest extends AbstractTest {
     println("ETH ==> " + ethRpc.signTransaction(sendEth(from, to, BigDecimal.ONE)));
     println(
         "TOKEN ==> "
-            + ethRpc.signTransaction(sendToken(from, to, BigDecimal.ONE, contractAddress)));
+            + ethRpc.signTransaction(sendToken(from, to, BigDecimal.ONE, ethContractAddress)));
   }
 
   @Test
   public void sendAllEth() {
-    println(ethRpc.sendAllEth(sendAllEth(from, to)));
+    println(ethRpc.sendAllEth(sendAllEth(to, from)));
   }
 
   @Test
   public void sendTransaction() {
     println(ethRpc.sendTransaction(sendEth(from, to, BigDecimal.ONE)));
-    println(ethRpc.sendTransaction(sendToken(from, to, BigDecimal.ONE, contractAddress)));
+    println(ethRpc.sendTransaction(sendToken(from, to, BigDecimal.ONE, ethContractAddress)));
   }
 
   @Test
   public void sendRawTransaction() {
-    String signData = ethRpc.signTransaction(sendToken(from, to, BigDecimal.ONE, contractAddress));
+    String signData =
+        ethRpc.signTransaction(sendToken(from, to, BigDecimal.ONE, ethContractAddress));
     println(ethRpc.sendRawTransaction(signData));
   }
 }

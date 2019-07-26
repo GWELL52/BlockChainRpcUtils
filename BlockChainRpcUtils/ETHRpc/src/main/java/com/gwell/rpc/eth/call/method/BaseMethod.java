@@ -1,15 +1,17 @@
 package com.gwell.rpc.eth.call.method;
 
+import com.gwell.rpc.common.enums.BlockChainEnum;
 import com.gwell.rpc.common.exception.ResponseException;
+import com.gwell.rpc.eth.call.override.Web3j;
 import com.gwell.rpc.eth.model.request.SendTransactionParams;
 import lombok.Setter;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;
-import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.DefaultBlockParameter;
 import org.web3j.protocol.core.DefaultBlockParameterName;
 import org.web3j.protocol.core.Response;
 import org.web3j.protocol.core.methods.response.*;
+import org.web3j.utils.Convert;
 
 import java.math.BigInteger;
 
@@ -88,6 +90,10 @@ public class BaseMethod {
   /** 获取gasPrice 单位:wei */
   @SneakyThrows
   public BigInteger getGasPrice() {
+    if (web3j.getBlockChain().equals(BlockChainEnum.VNS)) {
+      return Convert.Unit.GWEI.getWeiFactor().toBigInteger();
+    }
+
     EthGasPrice result = web3j.ethGasPrice().send();
     checkError(result);
     return result.getGasPrice();

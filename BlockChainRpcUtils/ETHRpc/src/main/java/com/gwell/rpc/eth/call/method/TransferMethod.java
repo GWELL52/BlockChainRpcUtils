@@ -2,6 +2,7 @@ package com.gwell.rpc.eth.call.method;
 
 import com.alibaba.fastjson.JSON;
 import com.gwell.rpc.common.exception.ResponseException;
+import com.gwell.rpc.eth.call.override.Web3j;
 import com.gwell.rpc.eth.model.request.SendTransactionParams;
 import com.gwell.rpc.eth.model.response.ETHFee;
 import lombok.Setter;
@@ -10,7 +11,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.web3j.crypto.Credentials;
 import org.web3j.crypto.RawTransaction;
 import org.web3j.crypto.TransactionEncoder;
-import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.DefaultBlockParameterName;
 import org.web3j.protocol.core.Response;
 import org.web3j.protocol.core.methods.response.EthGetBalance;

@@ -1,13 +1,14 @@
 package com.gwell.rpc.eth.call;
 
+import com.gwell.rpc.common.enums.BlockChainEnum;
 import com.gwell.rpc.common.model.Connection;
 import com.gwell.rpc.eth.call.method.*;
+import com.gwell.rpc.eth.call.override.Web3j;
 import com.gwell.rpc.eth.model.request.BalanceParams;
 import com.gwell.rpc.eth.model.request.SendTransactionParams;
 import com.gwell.rpc.eth.model.response.ETHFee;
 import com.gwell.rpc.eth.model.response.ETHTransactionInfo;
 import com.gwell.rpc.eth.model.response.EthAccount;
-import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.methods.response.EthBlock;
 import org.web3j.protocol.core.methods.response.Transaction;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
@@ -24,9 +25,11 @@ public class Call {
   private TransferMethod transferMethod;
   private TransactionInfoMethod transactionInfoMethod;
 
-  public Call(Connection connection, long chainId, String keystorePath) {
+  public Call(Connection connection, long chainId, String keystorePath, BlockChainEnum blockChain) {
     Web3j web3j =
-        Web3j.build(new HttpService(connection.getUrlBuilder().toString(), connection.getClient()));
+        Web3j.build(
+            new HttpService(connection.getUrlBuilder().toString(), connection.getClient()),
+            blockChain);
     this.baseMethod = BaseMethod.build(web3j);
     this.accountMethod = AccountMethod.build(keystorePath);
     this.balanceMethod = BalanceMethod.build(web3j);
