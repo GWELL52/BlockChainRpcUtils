@@ -13,14 +13,14 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 @RunWith(JUnit4.class)
-public class ETHRpcTest extends AbstractTest {
+public class ETCRpcTest extends AbstractTest {
 
-  private SendTransactionParams sendEth(EthAccount from, EthAccount to, BigDecimal amount) {
+  private SendTransactionParams sendEtc(EthAccount from, EthAccount to, BigDecimal amount) {
     return SendTransactionParams.createEthTransaction(
         from.getAddress(), from.getPassword(), to.getAddress(), amount);
   }
 
-  private SendTransactionParams sendAllEth(EthAccount from, EthAccount to) {
+  private SendTransactionParams sendAllEtc(EthAccount from, EthAccount to) {
     return SendTransactionParams.createAllEthTransaction(
         from.getAddress(), from.getPassword(), to.getAddress());
   }
@@ -37,172 +37,172 @@ public class ETHRpcTest extends AbstractTest {
 
   @Test
   public void getBlockNumber() {
-    println(ethRpc.getBlockNumber());
+    println(etcRpc.getBlockNumber());
   }
 
   @Test
   public void getBlockInfo() {
-    println(ethRpc.getBlockInfo(new BigInteger("4788666"), false));
-    println(ethRpc.getBlockInfo(new BigInteger("4788666"), true));
+    println(etcRpc.getBlockInfo(new BigInteger("4788666"), false));
+    println(etcRpc.getBlockInfo(new BigInteger("4788666"), true));
   }
 
   @Test
   public void getNonce() {
-    println(ethRpc.getNonce("0xc00dcf5646eb41f8c3737c67d18801e599dc4473"));
+    println(etcRpc.getNonce("0xc00dcf5646eb41f8c3737c67d18801e599dc4473"));
   }
 
   @Test
   public void getGasPrice() {
-    println(ethRpc.getGasPrice());
+    println(etcRpc.getGasPrice());
   }
 
   @Test
   public void getGasLimit() {
-    println("ALL ETH ==> " + ethRpc.getGasLimit(sendAllEth(from, to)));
-    println("ETH ==> " + ethRpc.getGasLimit(sendEth(from, to, BigDecimal.ONE)));
+    println("ALL ETC ==> " + etcRpc.getGasLimit(sendAllEtc(from, to)));
+    println("ETC ==> " + etcRpc.getGasLimit(sendEtc(from, to, BigDecimal.ONE)));
     println(
-        "TOKEN ==> " + ethRpc.getGasLimit(sendToken(from, to, BigDecimal.ONE, contractAddress)));
+        "TOKEN ==> " + etcRpc.getGasLimit(sendToken(from, to, BigDecimal.ONE, contractAddress)));
   }
 
   @Test
   public void getTransactionByHash() {
     println(
-        "ETH ==> "
+        "ETC ==> "
             + JSON.toJSONString(
-                ethRpc.getTransactionByHash(
+                etcRpc.getTransactionByHash(
                     "0x2e57b37e0348920718ada744c586ba1b60cac4b3801709cbb1ae2fae85dbafb7")));
     println(
         "TOKEN ==> "
             + JSON.toJSONString(
-                ethRpc.getTransactionByHash(
+                etcRpc.getTransactionByHash(
                     "0x6ea883b225c8c331d37418c8bf6b948e4449c59c782415a37d3e0190c4b6d1ce")));
   }
 
   @Test
   public void getTransactionReceipt() {
     println(
-        "ETH ==> "
+        "ETC ==> "
             + JSON.toJSONString(
-                ethRpc.getTransactionReceipt(
+                etcRpc.getTransactionReceipt(
                     "0x2e57b37e0348920718ada744c586ba1b60cac4b3801709cbb1ae2fae85dbafb7")));
     println(
         "TOKEN ==> "
             + JSON.toJSONString(
-                ethRpc.getTransactionReceipt(
+                etcRpc.getTransactionReceipt(
                     "0x6ea883b225c8c331d37418c8bf6b948e4449c59c782415a37d3e0190c4b6d1ce")));
   }
 
   @Test
   public void getTransactionAllInfo() {
     println(
-        "ETH - [getTransferTime=false] ==> "
+        "ETC - [getTransferTime=false] ==> "
             + JSON.toJSONString(
-                ethRpc.getTransactionAllInfo(
+                etcRpc.getTransactionAllInfo(
                     "0x2e57b37e0348920718ada744c586ba1b60cac4b3801709cbb1ae2fae85dbafb7", false)));
     println(
-        "ETH - [getTransferTime=true] ==> "
+        "ETC - [getTransferTime=true] ==> "
             + JSON.toJSONString(
-                ethRpc.getTransactionAllInfo(
+                etcRpc.getTransactionAllInfo(
                     "0x2e57b37e0348920718ada744c586ba1b60cac4b3801709cbb1ae2fae85dbafb7", true)));
     println(
         "TOKEN - [getTransferTime=false] ==> "
             + JSON.toJSONString(
-                ethRpc.getTransactionAllInfo(
+                etcRpc.getTransactionAllInfo(
                     "0x6ea883b225c8c331d37418c8bf6b948e4449c59c782415a37d3e0190c4b6d1ce", false)));
     println(
         "TOKEN - [getTransferTime=true] ==> "
             + JSON.toJSONString(
-                ethRpc.getTransactionAllInfo(
+                etcRpc.getTransactionAllInfo(
                     "0x6ea883b225c8c331d37418c8bf6b948e4449c59c782415a37d3e0190c4b6d1ce", true)));
   }
 
   @Test
   public void newAccount() {
-    println(ethRpc.newAccount("123456789"));
+    println(etcRpc.newAccount("123456789"));
   }
 
   @Test
   public void importPrivateKey() {
-    println(ethRpc.importPrivateKey(from));
+    println(etcRpc.importPrivateKey(from));
   }
 
   @Test
   public void getBalance() {
-    println("ETH ==> " + ethRpc.getBalance(BalanceParams.createEthBalance(from.getAddress())));
+    println("ETC ==> " + etcRpc.getBalance(BalanceParams.createEthBalance(from.getAddress())));
     println(
         "TOKEN ==> "
-            + ethRpc.getBalance(
+            + etcRpc.getBalance(
                 BalanceParams.createTokenBalance(from.getAddress(), contractAddress)));
   }
 
   @Test
   public void getTransactionData() {
-    println("ALL ETH ==> " + ethRpc.getTransactionData(sendAllEth(from, to)));
-    println("ETH ==> " + ethRpc.getTransactionData(sendEth(from, to, BigDecimal.ONE)));
+    println("ALL ETC ==> " + etcRpc.getTransactionData(sendAllEtc(from, to)));
+    println("ETC ==> " + etcRpc.getTransactionData(sendEtc(from, to, BigDecimal.ONE)));
     println(
         "TOKEN ==> "
-            + ethRpc.getTransactionData(sendToken(from, to, BigDecimal.ONE, contractAddress)));
+            + etcRpc.getTransactionData(sendToken(from, to, BigDecimal.ONE, contractAddress)));
   }
 
   @Test
   public void getTokenName() {
-    println(ethRpc.getTokenName(contractAddress));
+    println(etcRpc.getTokenName(contractAddress));
   }
 
   @Test
   public void getTokenSymbol() {
-    println(ethRpc.getTokenSymbol(contractAddress));
+    println(etcRpc.getTokenSymbol(contractAddress));
   }
 
   @Test
   public void getTokenTotalSupply() {
-    println(ethRpc.getTokenTotalSupply(contractAddress, null));
+    println(etcRpc.getTokenTotalSupply(contractAddress, null));
   }
 
   @Test
   public void getTokenDecimal() {
-    println(ethRpc.getTokenDecimal(contractAddress));
+    println(etcRpc.getTokenDecimal(contractAddress));
   }
 
   @Test
   public void getTokenUnit() {
-    BigDecimal unit = ethRpc.getTokenUnit(contractAddress);
+    BigDecimal unit = etcRpc.getTokenUnit(contractAddress);
     println("unit ==> " + unit);
     println("decimal ==> " + TokenMethod.getTokenDecimal(unit));
   }
 
   @Test
   public void getTransactionFee() {
-    println("ALL ETH ==> " + ethRpc.getTransactionFee(sendAllEth(from, to)));
-    println("ETH ==> " + ethRpc.getTransactionFee(sendEth(from, to, BigDecimal.ONE)));
+    println("ALL ETC ==> " + etcRpc.getTransactionFee(sendAllEtc(from, to)));
+    println("ETC ==> " + etcRpc.getTransactionFee(sendEtc(from, to, BigDecimal.ONE)));
     println(
         "TOKEN ==> "
-            + ethRpc.getTransactionFee(sendToken(from, to, BigDecimal.ONE, contractAddress)));
+            + etcRpc.getTransactionFee(sendToken(from, to, BigDecimal.ONE, contractAddress)));
   }
 
   @Test
   public void signTransaction() {
-    println("ALL ETH ==> " + ethRpc.signTransaction(sendAllEth(from, to)));
-    println("ETH ==> " + ethRpc.signTransaction(sendEth(from, to, BigDecimal.ONE)));
+    println("ALL ETC ==> " + etcRpc.signTransaction(sendAllEtc(from, to)));
+    println("ETC ==> " + etcRpc.signTransaction(sendEtc(from, to, BigDecimal.ONE)));
     println(
         "TOKEN ==> "
-            + ethRpc.signTransaction(sendToken(from, to, BigDecimal.ONE, contractAddress)));
+            + etcRpc.signTransaction(sendToken(from, to, BigDecimal.ONE, contractAddress)));
   }
 
   @Test
-  public void sendAllEth() {
-    println(ethRpc.sendAllEth(sendAllEth(from, to)));
+  public void sendAllEtc() {
+    println(etcRpc.sendAllEth(sendAllEtc(from, to)));
   }
 
   @Test
   public void sendTransaction() {
-    println(ethRpc.sendTransaction(sendEth(from, to, BigDecimal.ONE)));
-    println(ethRpc.sendTransaction(sendToken(from, to, BigDecimal.ONE, contractAddress)));
+    println(etcRpc.sendTransaction(sendEtc(from, to, BigDecimal.ONE)));
+    println(etcRpc.sendTransaction(sendToken(from, to, BigDecimal.ONE, contractAddress)));
   }
 
   @Test
   public void sendRawTransaction() {
-    String signData = ethRpc.signTransaction(sendToken(from, to, BigDecimal.ONE, contractAddress));
-    println(ethRpc.sendRawTransaction(signData));
+    String signData = etcRpc.signTransaction(sendToken(from, to, BigDecimal.ONE, contractAddress));
+    println(etcRpc.sendRawTransaction(signData));
   }
 }

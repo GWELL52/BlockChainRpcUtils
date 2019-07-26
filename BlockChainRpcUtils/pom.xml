@@ -12,6 +12,7 @@
         <module>common</module>
         <module>BTCRpc</module>
         <module>ETHRpc</module>
+        <module>VNSRpc</module>
     </modules>
 
     <properties>

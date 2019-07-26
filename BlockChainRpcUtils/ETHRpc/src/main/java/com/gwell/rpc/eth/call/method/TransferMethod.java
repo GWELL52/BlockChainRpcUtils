@@ -15,7 +15,7 @@ import org.web3j.protocol.core.DefaultBlockParameterName;
 import org.web3j.protocol.core.Response;
 import org.web3j.protocol.core.methods.response.EthGetBalance;
 import org.web3j.protocol.core.methods.response.EthSendTransaction;
-import org.web3j.tx.ChainId;
+import org.web3j.tx.ChainIdLong;
 import org.web3j.utils.Convert;
 import org.web3j.utils.Numeric;
 
@@ -25,11 +25,11 @@ import java.math.BigInteger;
 @Setter
 public class TransferMethod {
   private Web3j web3j;
-  private byte chainId;
+  private long chainId;
   private TokenMethod tokenMethod;
   private BaseMethod baseMethod;
 
-  public static TransferMethod build(Web3j web3j, byte chainId) {
+  public static TransferMethod build(Web3j web3j, long chainId) {
     TransferMethod instance = getInstance();
     instance.setWeb3j(web3j);
     instance.setChainId(chainId);
@@ -152,7 +152,7 @@ public class TransferMethod {
         RawTransaction.createTransaction(nonce, gasPrice, gasLimit, toAddress, value, data);
 
     byte[] signedMessage;
-    if (chainId > ChainId.MAINNET) {
+    if (chainId > ChainIdLong.MAINNET) {
       // 测试网络
       signedMessage = TransactionEncoder.signMessage(rawTransaction, chainId, credentials);
     } else {

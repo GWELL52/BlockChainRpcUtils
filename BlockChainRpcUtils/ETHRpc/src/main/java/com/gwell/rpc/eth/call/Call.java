@@ -24,7 +24,7 @@ public class Call {
   private TransferMethod transferMethod;
   private TransactionInfoMethod transactionInfoMethod;
 
-  public Call(Connection connection, byte chainId, String keystorePath) {
+  public Call(Connection connection, long chainId, String keystorePath) {
     Web3j web3j =
         Web3j.build(new HttpService(connection.getUrlBuilder().toString(), connection.getClient()));
     this.baseMethod = BaseMethod.build(web3j);
