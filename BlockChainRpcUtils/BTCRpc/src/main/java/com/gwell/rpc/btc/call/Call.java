@@ -2,6 +2,7 @@ package com.gwell.rpc.btc.call;
 
 import com.gwell.rpc.btc.call.method.*;
 import com.gwell.rpc.btc.model.response.*;
+import com.gwell.rpc.common.enums.BlockChainEnum;
 import com.gwell.rpc.common.model.Connection;
 
 import java.math.BigDecimal;
@@ -14,12 +15,12 @@ public class Call {
   private TransferMethod transferMethod;
   private TransactionInfoMethod transactionInfoMethod;
 
-  public Call(Connection connection) {
-    this.baseMethod = BaseMethod.build(connection);
-    this.accountMethod = AccountMethod.build(connection);
-    this.balanceMethod = BalanceMethod.build(connection);
-    this.transferMethod = TransferMethod.build(connection);
-    this.transactionInfoMethod = TransactionInfoMethod.build(connection);
+  public Call(Connection connection, BlockChainEnum blockChain) {
+    this.baseMethod = BaseMethod.build(connection, blockChain);
+    this.accountMethod = AccountMethod.build(connection, blockChain);
+    this.balanceMethod = BalanceMethod.build(connection, blockChain);
+    this.transferMethod = TransferMethod.build(connection, blockChain);
+    this.transactionInfoMethod = TransactionInfoMethod.build(connection, blockChain);
   }
 
   public GetInfo getInfo() {

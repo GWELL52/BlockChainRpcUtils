@@ -1,6 +1,7 @@
 package com.gwell.rpc.btc;
 
 import com.gwell.rpc.btc.call.Call;
+import com.gwell.rpc.common.enums.BlockChainEnum;
 import com.gwell.rpc.common.model.Connection;
 
 public class LTCRpc extends Call {
@@ -18,6 +19,6 @@ public class LTCRpc extends Call {
   }
 
   private LTCRpc(Connection connection) {
-    super(connection);
+    super(connection, BlockChainEnum.LTC);
   }
 }

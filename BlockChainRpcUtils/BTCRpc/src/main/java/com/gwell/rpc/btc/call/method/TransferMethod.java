@@ -1,22 +1,19 @@
 package com.gwell.rpc.btc.call.method;
 
 import com.gwell.rpc.btc.model.response.SendTransaction;
+import com.gwell.rpc.common.enums.BlockChainEnum;
 import com.gwell.rpc.common.model.Connection;
 import com.gwell.rpc.common.model.Request;
-import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
 
-@Setter
-public class TransferMethod {
+public class TransferMethod extends SuperMethod {
 
-  private Connection connection;
-
-  public static TransferMethod build(Connection connection) {
-    TransferMethod instance = new TransferMethod();
-    instance.setConnection(connection);
+  public static TransferMethod build(Connection connection, BlockChainEnum blockChain) {
+    TransferMethod instance = getInstance();
+    instance.init(connection, blockChain);
     return instance;
   }
 

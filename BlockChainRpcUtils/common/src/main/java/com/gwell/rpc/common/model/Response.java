@@ -1,6 +1,7 @@
 package com.gwell.rpc.common.model;
 
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.annotation.JSONField;
 import com.gwell.rpc.common.exception.ResponseException;
 import lombok.Data;
 import lombok.Getter;
@@ -12,6 +13,8 @@ import java.io.IOException;
 @Data
 public class Response<T> {
   private Error error;
+
+  @JSONField(serialize = false)
   private String rawResult;
 
   public boolean hasError() {

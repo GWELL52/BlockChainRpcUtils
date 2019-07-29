@@ -1,6 +1,7 @@
 package com.gwell.rpc.btc;
 
 import com.gwell.rpc.btc.call.Call;
+import com.gwell.rpc.common.enums.BlockChainEnum;
 import com.gwell.rpc.common.model.Connection;
 
 public class BCHRpc extends Call {
@@ -18,6 +19,6 @@ public class BCHRpc extends Call {
   }
 
   private BCHRpc(Connection connection) {
-    super(connection);
+    super(connection, BlockChainEnum.BCH);
   }
 }

@@ -3,20 +3,18 @@ package com.gwell.rpc.btc.call.method;
 import com.gwell.rpc.btc.model.response.GetAddresses;
 import com.gwell.rpc.btc.model.response.GetNewAddress;
 import com.gwell.rpc.btc.model.response.ListAccounts;
+import com.gwell.rpc.common.enums.BlockChainEnum;
 import com.gwell.rpc.common.model.Connection;
 import com.gwell.rpc.common.model.Request;
 import lombok.NonNull;
-import lombok.Setter;
 
 import java.util.Collections;
 
-@Setter
-public class AccountMethod {
-  private Connection connection;
+public class AccountMethod extends SuperMethod {
 
-  public static AccountMethod build(Connection connection) {
-    AccountMethod instance = new AccountMethod();
-    instance.setConnection(connection);
+  public static AccountMethod build(Connection connection, BlockChainEnum blockChain) {
+    AccountMethod instance = getInstance();
+    instance.init(connection, blockChain);
     return instance;
   }
 

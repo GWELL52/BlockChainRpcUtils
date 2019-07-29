@@ -11,65 +11,65 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 @RunWith(JUnit4.class)
-public class BTCRpcTest extends AbstractTest {
+public class DASHRpcTest extends AbstractTest {
   private void println(Object object) {
     System.out.println(JSON.toJSONString(object));
   }
 
   @Test
   public void getInfo() {
-    GetInfo result = btcRpc.getInfo();
+    GetInfo result = dashRpc.getInfo();
     println(result.getInfo());
   }
 
   @Test
   public void getNewAddress() {
-    println(btcRpc.getNewAddress("test").getAddress());
+    println(dashRpc.getNewAddress("test").getAddress());
   }
 
   @Test
   public void getBalance() {
-    println(btcRpc.getBalance("test").getBalance());
-    println(btcRpc.getBalance(null).getBalance());
+    println(dashRpc.getBalance("test").getBalance());
+    println(dashRpc.getBalance(null).getBalance());
   }
 
   @Test
   public void getAddressBalance() {
-    println(btcRpc.getAddressBalance("mwdXtp8ow61jcGuEXYVy5aZqksxvtrnNsL").getBalance());
+    println(dashRpc.getAddressBalance("mwdXtp8ow61jcGuEXYVy5aZqksxvtrnNsL").getBalance());
   }
 
   @Test
   public void getAddressesByAccount() {
-    println(btcRpc.getAddressesByAccount("test").getAddressList());
+    println(dashRpc.getAddressesByAccount("test").getAddressList());
   }
 
   @Test
   public void listTransactions() {
-    println(btcRpc.listTransactions("test", 1000L, 0L).getTransactionList());
+    println(dashRpc.listTransactions("test", 1000L, 0L).getTransactionList());
   }
 
   @Test
   public void sendToAddress() {
     println(
-        btcRpc
+        dashRpc
             .sendToAddress("n1tysbphwWvQYXf3ap2uN4ZQE5U9gVz5VV", new BigDecimal("0.001"))
             .getHash());
   }
 
   @Test
   public void getBlockCount() {
-    println(btcRpc.getBlockCount().getBlockCount());
+    println(dashRpc.getBlockCount().getBlockCount());
   }
 
   @Test
   public void getBlockHash() {
-    println(btcRpc.getBlockHash(new BigInteger("1000")).getBlockHash());
+    println(dashRpc.getBlockHash(new BigInteger("1000")).getBlockHash());
   }
 
   @Test
   public void getBlockInfo() {
     println(
-        btcRpc
+        dashRpc
             .getBlockInfo("00000000373403049c5fff2cd653590e8cbe6f7ac639db270e7d1a7503d698df")
             .getInfo());
   }
@@ -77,7 +77,7 @@ public class BTCRpcTest extends AbstractTest {
   @Test
   public void getTransactionInfo() {
     println(
-        btcRpc
+        dashRpc
             .getTransactionInfo("bc889691337643ed1eec6aadd6b85efa28af71f9fe162dac1394ebb4c1d808f3")
             .getDetailList());
   }
@@ -85,7 +85,7 @@ public class BTCRpcTest extends AbstractTest {
   @Test
   public void getRawTransactionInfo() {
     println(
-        btcRpc
+        dashRpc
             .getRawTransactionInfo(
                 "bc889691337643ed1eec6aadd6b85efa28af71f9fe162dac1394ebb4c1d808f3")
             .getRawInfo());
@@ -93,38 +93,38 @@ public class BTCRpcTest extends AbstractTest {
 
   @Test
   public void listAccounts() {
-    ListAccounts result = btcRpc.listAccounts();
+    ListAccounts result = dashRpc.listAccounts();
     println(result.getAccountMap());
     println(result.getAccountList());
   }
 
   @Test
   public void getReceivedByAccount() {
-    println(btcRpc.getReceivedByAccount("test").getReceived());
+    println(dashRpc.getReceivedByAccount("test").getReceived());
   }
 
   @Test
   public void getReceivedByAddress() {
     println(
         "不属于钱包管理的: "
-            + btcRpc.getReceivedByAddress("mwdXtp8ow61jcGuEXYVy5aZqksxvtrnNsL").getReceived());
+            + dashRpc.getReceivedByAddress("mwdXtp8ow61jcGuEXYVy5aZqksxvtrnNsL").getReceived());
     println(
         "属于钱包管理的: "
-            + btcRpc.getReceivedByAddress("n1tysbphwWvQYXf3ap2uN4ZQE5U9gVz5VV").getReceived());
+            + dashRpc.getReceivedByAddress("n1tysbphwWvQYXf3ap2uN4ZQE5U9gVz5VV").getReceived());
   }
 
   @Test
   public void sendRawTransaction() {
-    println(btcRpc.sendRawTransaction("rawData").getHash());
+    println(dashRpc.sendRawTransaction("rawData").getHash());
   }
 
   @Test
   public void getAddressUnspentOutputs() {
-    println(btcRpc.getAddressUnspentOutputs("mwdXtp8ow61jcGuEXYVy5aZqksxvtrnNsL").getUTXOList());
+    println(dashRpc.getAddressUnspentOutputs("mwdXtp8ow61jcGuEXYVy5aZqksxvtrnNsL").getUTXOList());
   }
 
   @Test
   public void getAddressAllHash() {
-    println(btcRpc.getAddressAllHash("mwdXtp8ow61jcGuEXYVy5aZqksxvtrnNsL").getHashList());
+    println(dashRpc.getAddressAllHash("mwdXtp8ow61jcGuEXYVy5aZqksxvtrnNsL").getHashList());
   }
 }

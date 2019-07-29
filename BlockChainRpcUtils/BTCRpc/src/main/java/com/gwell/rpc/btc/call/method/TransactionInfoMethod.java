@@ -4,21 +4,19 @@ import com.gwell.rpc.btc.model.response.GetAddressAllHash;
 import com.gwell.rpc.btc.model.response.GetRawTransactionInfo;
 import com.gwell.rpc.btc.model.response.GetTransactionInfo;
 import com.gwell.rpc.btc.model.response.ListTransactions;
+import com.gwell.rpc.common.enums.BlockChainEnum;
 import com.gwell.rpc.common.model.Connection;
 import com.gwell.rpc.common.model.Request;
-import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
 import java.util.Collections;
 
-@Setter
-public class TransactionInfoMethod {
-  private Connection connection;
+public class TransactionInfoMethod extends SuperMethod {
 
-  public static TransactionInfoMethod build(Connection connection) {
-    TransactionInfoMethod instance = new TransactionInfoMethod();
-    instance.setConnection(connection);
+  public static TransactionInfoMethod build(Connection connection, BlockChainEnum blockChain) {
+    TransactionInfoMethod instance = getInstance();
+    instance.init(connection, blockChain);
     return instance;
   }
 

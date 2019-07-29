@@ -4,20 +4,18 @@ import com.gwell.rpc.btc.model.response.GetBlockCount;
 import com.gwell.rpc.btc.model.response.GetBlockHash;
 import com.gwell.rpc.btc.model.response.GetBlockInfo;
 import com.gwell.rpc.btc.model.response.GetInfo;
+import com.gwell.rpc.common.enums.BlockChainEnum;
 import com.gwell.rpc.common.model.Connection;
 import com.gwell.rpc.common.model.Request;
-import lombok.Setter;
 
 import java.math.BigInteger;
 import java.util.Collections;
 
-@Setter
-public class BaseMethod {
-  private Connection connection;
+public class BaseMethod extends SuperMethod {
 
-  public static BaseMethod build(Connection connection) {
-    BaseMethod instance = new BaseMethod();
-    instance.setConnection(connection);
+  public static BaseMethod build(Connection connection, BlockChainEnum blockChain) {
+    BaseMethod instance = getInstance();
+    instance.init(connection, blockChain);
     return instance;
   }
 

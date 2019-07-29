@@ -4,20 +4,18 @@ import com.gwell.rpc.btc.model.response.GetAddressBalance;
 import com.gwell.rpc.btc.model.response.GetAddressUTXOs;
 import com.gwell.rpc.btc.model.response.GetBalance;
 import com.gwell.rpc.btc.model.response.GetReceivedInfo;
+import com.gwell.rpc.common.enums.BlockChainEnum;
 import com.gwell.rpc.common.model.Connection;
 import com.gwell.rpc.common.model.Request;
 import lombok.NonNull;
-import lombok.Setter;
 
 import java.util.Collections;
 
-@Setter
-public class BalanceMethod {
-  private Connection connection;
+public class BalanceMethod extends SuperMethod {
 
-  public static BalanceMethod build(Connection connection) {
-    BalanceMethod instance = new BalanceMethod();
-    instance.setConnection(connection);
+  public static BalanceMethod build(Connection connection, BlockChainEnum blockChain) {
+    BalanceMethod instance = getInstance();
+    instance.init(connection, blockChain);
     return instance;
   }
 

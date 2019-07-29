@@ -1,9 +1,10 @@
 package com.gwell.rpc.btc;
 
-import com.gwell.rpc.btc.call.Call;
+import com.gwell.rpc.btc.call.OMNICall;
+import com.gwell.rpc.common.enums.BlockChainEnum;
 import com.gwell.rpc.common.model.Connection;
 
-public class OMNIRpc extends Call {
+public class OMNIRpc extends OMNICall {
 
   public static OMNIRpc build(String url) {
     return OMNIRpc.build(Connection.builder(url).build());
@@ -18,6 +19,6 @@ public class OMNIRpc extends Call {
   }
 
   private OMNIRpc(Connection connection) {
-    super(connection);
+    super(connection, BlockChainEnum.OMNI);
   }
 }
