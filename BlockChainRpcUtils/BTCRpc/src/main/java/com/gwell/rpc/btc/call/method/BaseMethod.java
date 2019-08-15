@@ -14,21 +14,12 @@ import java.util.Collections;
 public class BaseMethod extends SuperMethod {
 
   public static BaseMethod build(Connection connection, BlockChainEnum blockChain) {
-    BaseMethod instance = getInstance();
+    BaseMethod instance = new BaseMethod();
     instance.init(connection, blockChain);
     return instance;
   }
 
   private BaseMethod() {}
-
-  /** 在静态内部类中持有singleton的实例，可以被直接初始化 */
-  private static class Holder {
-    private static BaseMethod instance = new BaseMethod();
-  }
-
-  private static BaseMethod getInstance() {
-    return Holder.instance;
-  }
 
   /** 获取服务器版本余额信息 */
   public GetInfo getInfo() {

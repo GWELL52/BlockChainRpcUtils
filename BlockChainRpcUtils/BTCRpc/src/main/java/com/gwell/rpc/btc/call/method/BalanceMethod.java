@@ -14,21 +14,12 @@ import java.util.Collections;
 public class BalanceMethod extends SuperMethod {
 
   public static BalanceMethod build(Connection connection, BlockChainEnum blockChain) {
-    BalanceMethod instance = getInstance();
+    BalanceMethod instance = new BalanceMethod();
     instance.init(connection, blockChain);
     return instance;
   }
 
   private BalanceMethod() {}
-
-  /** 在静态内部类中持有singleton的实例，可以被直接初始化 */
-  private static class Holder {
-    private static BalanceMethod instance = new BalanceMethod();
-  }
-
-  private static BalanceMethod getInstance() {
-    return Holder.instance;
-  }
 
   /**
    * 根据账号获取余额

@@ -21,22 +21,13 @@ public class BaseMethod {
   private TokenMethod tokenMethod;
 
   public static BaseMethod build(Web3j web3j) {
-    BaseMethod instance = getInstance();
+    BaseMethod instance = new BaseMethod();
     instance.setWeb3j(web3j);
     instance.setTokenMethod(TokenMethod.build(web3j));
     return instance;
   }
 
   private BaseMethod() {}
-
-  /** 在静态内部类中持有singleton的实例，可以被直接初始化 */
-  private static class Holder {
-    private static BaseMethod instance = new BaseMethod();
-  }
-
-  private static BaseMethod getInstance() {
-    return Holder.instance;
-  }
 
   private void checkError(Response result) {
     if (result.hasError()) {
@@ -67,10 +58,23 @@ public class BaseMethod {
   @SneakyThrows
   public BigInteger getGasLimit(SendTransactionParams params) {
     org.web3j.protocol.core.methods.request.Transaction transaction;
+    BigInteger gasPrice = params.getGasPrice();
+    if (gasPrice == null) {
+      gasPrice = getGasPrice();
+    }
+    BigInteger nonce = params.getNonce();
+    if (nonce == null) {
+      nonce = getNonce(params.getFromAddress());
+    }
     if (StringUtils.isBlank(params.getContractAddress())) {
       transaction =
           org.web3j.protocol.core.methods.request.Transaction.createEtherTransaction(
-              params.getFromAddress(), null, null, null, params.getToAddress(), BigInteger.ZERO);
+              params.getFromAddress(),
+              nonce,
+              gasPrice,
+              null,
+              params.getToAddress(),
+              BigInteger.ZERO);
     } else {
       String data;
       if (StringUtils.isNotBlank(params.getData())) {
@@ -80,7 +84,13 @@ public class BaseMethod {
       }
       transaction =
           org.web3j.protocol.core.methods.request.Transaction.createFunctionCallTransaction(
-              params.getFromAddress(), null, null, null, params.getContractAddress(), data);
+              params.getFromAddress(),
+              nonce,
+              gasPrice,
+              new BigInteger("999999"),
+              params.getContractAddress(),
+              BigInteger.ZERO,
+              data);
     }
     EthEstimateGas result = web3j.ethEstimateGas(transaction).send();
     checkError(result);
@@ -90,6 +100,7 @@ public class BaseMethod {
   /** 获取gasPrice 单位:wei */
   @SneakyThrows
   public BigInteger getGasPrice() {
+    //    return Convert.Unit.GWEI.getWeiFactor().toBigInteger().multiply(new BigInteger("2"));
     if (web3j.getBlockChain().equals(BlockChainEnum.VNS)) {
       return Convert.Unit.GWEI.getWeiFactor().toBigInteger();
     }

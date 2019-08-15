@@ -15,21 +15,12 @@ import java.util.Collections;
 public class TransactionInfoMethod extends SuperMethod {
 
   public static TransactionInfoMethod build(Connection connection, BlockChainEnum blockChain) {
-    TransactionInfoMethod instance = getInstance();
+    TransactionInfoMethod instance = new TransactionInfoMethod();
     instance.init(connection, blockChain);
     return instance;
   }
 
   private TransactionInfoMethod() {}
-
-  /** 在静态内部类中持有singleton的实例，可以被直接初始化 */
-  private static class Holder {
-    private static TransactionInfoMethod instance = new TransactionInfoMethod();
-  }
-
-  private static TransactionInfoMethod getInstance() {
-    return Holder.instance;
-  }
 
   /**
    * 获取交易信息集合

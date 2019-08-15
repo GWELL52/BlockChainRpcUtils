@@ -22,21 +22,12 @@ public class AccountMethod {
   private String keystorePath;
 
   public static AccountMethod build(String keystorePath) {
-    AccountMethod instance = getInstance();
+    AccountMethod instance = new AccountMethod();
     instance.setKeystorePath(keystorePath);
     return instance;
   }
 
   private AccountMethod() {}
-
-  /** 在静态内部类中持有singleton的实例，可以被直接初始化 */
-  private static class Holder {
-    private static AccountMethod instance = new AccountMethod();
-  }
-
-  private static AccountMethod getInstance() {
-    return Holder.instance;
-  }
 
   /**
    * 所有信息(私钥, 地址) - keystore

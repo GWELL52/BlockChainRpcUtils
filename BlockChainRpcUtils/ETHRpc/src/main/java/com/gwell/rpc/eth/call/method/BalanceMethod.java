@@ -31,22 +31,13 @@ public class BalanceMethod {
   private TokenMethod tokenMethod;
 
   public static BalanceMethod build(Web3j web3j) {
-    BalanceMethod instance = getInstance();
+    BalanceMethod instance = new BalanceMethod();
     instance.setWeb3j(web3j);
     instance.setTokenMethod(TokenMethod.build(web3j));
     return instance;
   }
 
   private BalanceMethod() {}
-
-  /** 在静态内部类中持有singleton的实例，可以被直接初始化 */
-  private static class Holder {
-    private static BalanceMethod instance = new BalanceMethod();
-  }
-
-  private static BalanceMethod getInstance() {
-    return Holder.instance;
-  }
 
   private void checkError(Response result) {
     if (result.hasError()) {

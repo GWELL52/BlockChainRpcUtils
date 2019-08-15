@@ -30,7 +30,7 @@ public class TransferMethod {
   private BaseMethod baseMethod;
 
   public static TransferMethod build(Web3j web3j, long chainId) {
-    TransferMethod instance = getInstance();
+    TransferMethod instance = new TransferMethod();
     instance.setWeb3j(web3j);
     instance.setChainId(chainId);
     instance.setTokenMethod(TokenMethod.build(web3j));
@@ -39,15 +39,6 @@ public class TransferMethod {
   }
 
   private TransferMethod() {}
-
-  /** 在静态内部类中持有singleton的实例，可以被直接初始化 */
-  private static class Holder {
-    private static TransferMethod instance = new TransferMethod();
-  }
-
-  private static TransferMethod getInstance() {
-    return Holder.instance;
-  }
 
   private void checkError(Response result) {
     if (result.hasError()) {

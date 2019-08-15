@@ -13,21 +13,12 @@ import java.util.Collections;
 public class AccountMethod extends SuperMethod {
 
   public static AccountMethod build(Connection connection, BlockChainEnum blockChain) {
-    AccountMethod instance = getInstance();
+    AccountMethod instance = new AccountMethod();
     instance.init(connection, blockChain);
     return instance;
   }
 
   private AccountMethod() {}
-
-  /** 在静态内部类中持有singleton的实例，可以被直接初始化 */
-  private static class Holder {
-    private static AccountMethod instance = new AccountMethod();
-  }
-
-  private static AccountMethod getInstance() {
-    return Holder.instance;
-  }
 
   /**
    * 创建地址

@@ -26,21 +26,12 @@ public class TokenMethod {
   private Web3j web3j;
 
   public static TokenMethod build(Web3j web3j) {
-    TokenMethod instance = getInstance();
+    TokenMethod instance = new TokenMethod();
     instance.setWeb3j(web3j);
     return instance;
   }
 
   private TokenMethod() {}
-
-  /** 在静态内部类中持有singleton的实例，可以被直接初始化 */
-  private static class Holder {
-    private static TokenMethod instance = new TokenMethod();
-  }
-
-  private static TokenMethod getInstance() {
-    return Holder.instance;
-  }
 
   private void checkError(Response result) {
     if (result.hasError()) {
@@ -176,10 +167,11 @@ public class TokenMethod {
     Transaction transaction =
         Transaction.createEthCallTransaction(contractAddress, contractAddress, data);
 
-    EthCall result = web3j.ethCall(transaction, DefaultBlockParameterName.LATEST).sendAsync().get();
-    checkError(result);
+    EthCall ethCall =
+        web3j.ethCall(transaction, DefaultBlockParameterName.LATEST).sendAsync().get();
+    checkError(ethCall);
     List<Type> results =
-        FunctionReturnDecoder.decode(result.getValue(), function.getOutputParameters());
+        FunctionReturnDecoder.decode(ethCall.getValue(), function.getOutputParameters());
     if (results.size() < 1) {
       throw new RuntimeException("合约不存在!");
     }

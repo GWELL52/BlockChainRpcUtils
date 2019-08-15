@@ -18,21 +18,12 @@ import java.util.Collections;
 public class OMNIMethod extends SuperMethod {
 
   public static OMNIMethod build(Connection connection, BlockChainEnum blockChain) {
-    OMNIMethod instance = getInstance();
+    OMNIMethod instance = new OMNIMethod();
     instance.init(connection, blockChain);
     return instance;
   }
 
   private OMNIMethod() {}
-
-  /** 在静态内部类中持有singleton的实例，可以被直接初始化 */
-  private static class Holder {
-    private static OMNIMethod instance = new OMNIMethod();
-  }
-
-  private static OMNIMethod getInstance() {
-    return Holder.instance;
-  }
 
   /**
    * 获取propertyId币种余额

@@ -17,22 +17,13 @@ public class TransactionInfoMethod {
   private BaseMethod baseMethod;
 
   public static TransactionInfoMethod build(Web3j web3j) {
-    TransactionInfoMethod instance = getInstance();
+    TransactionInfoMethod instance = new TransactionInfoMethod();
     instance.setWeb3j(web3j);
     instance.setBaseMethod(BaseMethod.build(web3j));
     return instance;
   }
 
   private TransactionInfoMethod() {}
-
-  /** 在静态内部类中持有singleton的实例，可以被直接初始化 */
-  private static class Holder {
-    private static TransactionInfoMethod instance = new TransactionInfoMethod();
-  }
-
-  private static TransactionInfoMethod getInstance() {
-    return Holder.instance;
-  }
 
   private void checkError(Response result) {
     if (result.hasError()) {

@@ -11,8 +11,7 @@ import java.math.BigInteger;
 /** 发送交易参数类 */
 @Data
 public class SendTransactionParams {
-  private String fromAddress;
-  private String password;
+  private EthAccount fromAccount;
   private String toAddress;
   private BigDecimal amount;
 
@@ -27,100 +26,64 @@ public class SendTransactionParams {
   private String data;
 
   public Credentials getCredentials() {
-    EthAccount ethAccount = new EthAccount(fromAddress, password);
-    return ethAccount.getCredentials();
+    return fromAccount.getCredentials();
+  }
+
+  public String getFromAddress() {
+    return fromAccount.getAddress();
   }
 
   public static SendTransactionParams createAllEthTransaction(
-      String fromAddress, String password, String toAddress) {
+      EthAccount fromAccount, String toAddress) {
     return new SendTransactionParams(
-        fromAddress, password, toAddress, BigDecimal.ZERO, null, "", null, null, null);
+        fromAccount, toAddress, BigDecimal.ZERO, null, "", null, null, null);
   }
 
   public static SendTransactionParams createEthTransaction(
-      String fromAddress, String password, String toAddress, BigDecimal amount) {
-    return new SendTransactionParams(
-        fromAddress, password, toAddress, amount, null, "", null, null, null);
+      EthAccount fromAccount, String toAddress, BigDecimal amount) {
+    return new SendTransactionParams(fromAccount, toAddress, amount, null, "", null, null, null);
   }
 
   public static SendTransactionParams createEthTransaction(
-      String fromAddress,
-      String password,
+      EthAccount fromAccount,
       String toAddress,
       BigDecimal amount,
       BigInteger gasLimit,
       BigInteger gasPrice,
       BigInteger nonce) {
     return new SendTransactionParams(
-        fromAddress, password, toAddress, amount, null, "", gasLimit, gasPrice, nonce);
+        fromAccount, toAddress, amount, null, "", gasLimit, gasPrice, nonce);
   }
 
   public static SendTransactionParams createTokenTransaction(
-      String fromAddress,
-      String password,
-      String toAddress,
-      BigDecimal amount,
-      String contractAddress) {
+      EthAccount fromAccount, String toAddress, BigDecimal amount, String contractAddress) {
     return new SendTransactionParams(
-        fromAddress,
-        password,
-        toAddress,
-        amount,
-        contractAddress,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null);
+        fromAccount, toAddress, amount, contractAddress, null, null, null, null, null, null);
   }
 
   public static SendTransactionParams createTokenTransaction(
-      String fromAddress,
-      String password,
+      EthAccount fromAccount,
       String toAddress,
       BigDecimal amount,
       String contractAddress,
       String unit) {
     return new SendTransactionParams(
-        fromAddress,
-        password,
-        toAddress,
-        amount,
-        contractAddress,
-        unit,
-        null,
-        null,
-        null,
-        null,
-        null);
+        fromAccount, toAddress, amount, contractAddress, unit, null, null, null, null, null);
   }
 
   public static SendTransactionParams createTokenTransaction(
-      String fromAddress,
-      String password,
+      EthAccount fromAccount,
       String toAddress,
       BigDecimal amount,
       String contractAddress,
       String method,
       String unit) {
     return new SendTransactionParams(
-        fromAddress,
-        password,
-        toAddress,
-        amount,
-        contractAddress,
-        unit,
-        method,
-        null,
-        null,
-        null,
-        null);
+        fromAccount, toAddress, amount, contractAddress, unit, method, null, null, null, null);
   }
 
   public static SendTransactionParams createTokenTransaction(
-      String fromAddress,
-      String password,
+      EthAccount fromAccount,
       String toAddress,
       BigDecimal amount,
       String contractAddress,
@@ -130,8 +93,7 @@ public class SendTransactionParams {
       BigInteger gasPrice,
       BigInteger nonce) {
     return new SendTransactionParams(
-        fromAddress,
-        password,
+        fromAccount,
         toAddress,
         amount,
         contractAddress,
@@ -146,8 +108,7 @@ public class SendTransactionParams {
   public SendTransactionParams() {}
 
   public SendTransactionParams(
-      String fromAddress,
-      String password,
+      EthAccount fromAccount,
       String toAddress,
       BigDecimal amount,
       String contractAddress,
@@ -155,8 +116,7 @@ public class SendTransactionParams {
       BigInteger gasLimit,
       BigInteger gasPrice,
       BigInteger nonce) {
-    this.fromAddress = fromAddress;
-    this.password = password;
+    this.fromAccount = fromAccount;
     this.toAddress = toAddress;
     this.amount = amount;
     this.contractAddress = contractAddress;
@@ -167,8 +127,7 @@ public class SendTransactionParams {
   }
 
   public SendTransactionParams(
-      String fromAddress,
-      String password,
+      EthAccount fromAccount,
       String toAddress,
       BigDecimal amount,
       String contractAddress,
@@ -178,8 +137,7 @@ public class SendTransactionParams {
       BigInteger gasLimit,
       BigInteger gasPrice,
       BigInteger nonce) {
-    this.fromAddress = fromAddress;
-    this.password = password;
+    this.fromAccount = fromAccount;
     this.toAddress = toAddress;
     this.amount = amount;
     this.contractAddress = contractAddress;

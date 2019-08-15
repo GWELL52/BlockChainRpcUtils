@@ -46,12 +46,12 @@ public class EthAccount {
     this.password = password;
   }
 
-  public EthAccount(String address, String privateKey, String password) {
+  public EthAccount(String privateKey) {
     this.credentials = Credentials.create(privateKey.replaceFirst("0x", ""));
-    this.address = address;
+    this.address = credentials.getAddress();
     this.privateKey = credentials.getEcKeyPair().getPrivateKey().toString(16);
     this.publicKey = credentials.getEcKeyPair().getPublicKey().toString(16);
-    this.password = password;
+    this.password = "" + System.currentTimeMillis();
   }
 
   public EthAccount(String address, ECKeyPair ecKeyPair, String password) {
@@ -79,6 +79,9 @@ public class EthAccount {
   /** 获取凭据 */
   @SneakyThrows
   public Credentials getCredentials() {
+    if (credentials != null) {
+      return credentials;
+    }
     // 从私钥中获取凭据
     Credentials credentials;
     if (StringUtils.isNotBlank(privateKey)) {

@@ -16,13 +16,11 @@ import java.math.BigInteger;
 public class VNSRpcTest extends AbstractTest {
 
   private SendTransactionParams sendVns(EthAccount from, EthAccount to, BigDecimal amount) {
-    return SendTransactionParams.createEthTransaction(
-        from.getAddress(), from.getPassword(), to.getAddress(), amount);
+    return SendTransactionParams.createEthTransaction(from, to.getAddress(), amount);
   }
 
   private SendTransactionParams sendAllVns(EthAccount from, EthAccount to) {
-    return SendTransactionParams.createAllEthTransaction(
-        from.getAddress(), from.getPassword(), to.getAddress());
+    return SendTransactionParams.createAllEthTransaction(from, to.getAddress());
   }
 
   private void println(Object object) {

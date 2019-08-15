@@ -16,13 +16,11 @@ import java.math.BigInteger;
 public class ETCRpcTest extends AbstractTest {
 
   private SendTransactionParams sendEtc(EthAccount from, EthAccount to, BigDecimal amount) {
-    return SendTransactionParams.createEthTransaction(
-        from.getAddress(), from.getPassword(), to.getAddress(), amount);
+    return SendTransactionParams.createEthTransaction(from, to.getAddress(), amount);
   }
 
   private SendTransactionParams sendAllEtc(EthAccount from, EthAccount to) {
-    return SendTransactionParams.createAllEthTransaction(
-        from.getAddress(), from.getPassword(), to.getAddress());
+    return SendTransactionParams.createAllEthTransaction(from, to.getAddress());
   }
 
   private void println(Object object) {

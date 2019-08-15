@@ -12,21 +12,12 @@ import java.util.Collections;
 public class TransferMethod extends SuperMethod {
 
   public static TransferMethod build(Connection connection, BlockChainEnum blockChain) {
-    TransferMethod instance = getInstance();
+    TransferMethod instance = new TransferMethod();
     instance.init(connection, blockChain);
     return instance;
   }
 
   private TransferMethod() {}
-
-  /** 在静态内部类中持有singleton的实例，可以被直接初始化 */
-  private static class Holder {
-    private static TransferMethod instance = new TransferMethod();
-  }
-
-  private static TransferMethod getInstance() {
-    return Holder.instance;
-  }
 
   /**
    * 转账给某个地址
