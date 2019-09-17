@@ -16,8 +16,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-
-        <web3j.version>4.3.0</web3j.version>
     </properties>
 
     <dependencies>
@@ -25,13 +23,6 @@
             <groupId>com.gwell.rpc</groupId>
             <artifactId>common</artifactId>
             <version>${project.version}</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.web3j/core -->
-        <dependency>
-            <groupId>org.web3j</groupId>
-            <artifactId>core</artifactId>
-            <version>${web3j.version}</version>
         </dependency>
     </dependencies>
 

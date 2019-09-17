@@ -50,4 +50,5 @@ public class AccountMethod extends SuperMethod {
   public ListAccounts listAccounts() {
     return Request.rpc(connection, "listaccounts", null, ListAccounts.class).send();
   }
+
 }

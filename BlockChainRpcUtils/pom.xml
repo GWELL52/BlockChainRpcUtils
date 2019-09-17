@@ -27,9 +27,49 @@
         <slf4j.version>1.7.26</slf4j.version>
         <logback.version>1.2.3</logback.version>
         <junit.version>4.12</junit.version>
+        <web3j.version>4.3.0</web3j.version>
+        <bitcoinj.version>0.14.7</bitcoinj.version>
+        <bip.version>2019.01.27</bip.version>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>nova crypto</id>
+            <name>nova crypto Repository</name>
+            <url>https://dl.bintray.com/novacrypto/BIP/</url>
+        </repository>
+    </repositories>
+
     <dependencies>
+        <!-- BIP32 -->
+        <dependency>
+            <groupId>io.github.novacrypto</groupId>
+            <artifactId>BIP32</artifactId>
+            <version>${bip.version}</version>
+        </dependency>
+        <!-- BIP44 -->
+        <dependency>
+            <groupId>io.github.novacrypto</groupId>
+            <artifactId>BIP44</artifactId>
+            <version>${bip.version}</version>
+        </dependency>
+
+        <!-- WEB3J -->
+        <!-- https://mvnrepository.com/artifact/org.web3j/core -->
+        <dependency>
+            <groupId>org.web3j</groupId>
+            <artifactId>core</artifactId>
+            <version>${web3j.version}</version>
+        </dependency>
+
+        <!-- BIT_COIN_J -->
+        <!-- https://mvnrepository.com/artifact/org.bitcoinj/bitcoinj-core -->
+        <dependency>
+            <groupId>org.bitcoinj</groupId>
+            <artifactId>bitcoinj-core</artifactId>
+            <version>${bitcoinj.version}</version>
+        </dependency>
+
         <!-- Lombok -->
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
