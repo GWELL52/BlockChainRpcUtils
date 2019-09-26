@@ -9,57 +9,57 @@ import java.util.Date;
 
 @Data
 public class OMNITransactionInfo {
-  @JSONField(name = "txid")
+  @JSONField(alternateNames = "txid")
   private String hash;
 
-  @JSONField(name = "fee")
+  @JSONField(alternateNames = "fee")
   private String fee;
 
-  @JSONField(name = "sendingaddress")
+  @JSONField(alternateNames = "sendingaddress")
   private String formAddress;
 
-  @JSONField(name = "referenceaddress")
+  @JSONField(alternateNames = "referenceaddress")
   private String toAddress;
 
   /** 交易是否涉及钱包中的地址 */
-  @JSONField(name = "ismine")
+  @JSONField(alternateNames = "ismine")
   private boolean isMine;
 
-  @JSONField(name = "version")
+  @JSONField(alternateNames = "version")
   private Long version;
 
-  @JSONField(name = "type_int")
+  @JSONField(alternateNames = "type_int")
   private Long typeInt;
 
-  @JSONField(name = "type")
+  @JSONField(alternateNames = "type")
   private String type;
 
-  @JSONField(name = "propertyid")
+  @JSONField(alternateNames = "propertyid")
   private Integer propertyId;
 
   /** Token是否可以整除 */
-  @JSONField(name = "divisible")
+  @JSONField(alternateNames = "divisible")
   private boolean divisible;
 
-  @JSONField(name = "amount")
+  @JSONField(alternateNames = "amount")
   private BigDecimal amount;
 
-  @JSONField(name = "valid")
+  @JSONField(alternateNames = "valid")
   private boolean valid;
 
-  @JSONField(name = "blockhash")
+  @JSONField(alternateNames = "blockhash")
   private String blockHash;
 
-  @JSONField(name = "blocktime", format = "unixtime")
+  @JSONField(alternateNames = "blocktime", format = "unixtime")
   private Date blockTime;
 
   /** 在当前块的哪个位置 */
-  @JSONField(name = "positioninblock")
+  @JSONField(alternateNames = "positioninblock")
   private Long positionInBlock;
 
-  @JSONField(name = "block")
+  @JSONField(alternateNames = "block")
   private BigInteger blockNumber;
 
-  @JSONField(name = "confirmations")
+  @JSONField(alternateNames = "confirmations")
   private Long confirmations;
 }

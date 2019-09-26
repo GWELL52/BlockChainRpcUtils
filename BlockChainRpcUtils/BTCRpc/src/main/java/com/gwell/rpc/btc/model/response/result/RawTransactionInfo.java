@@ -10,110 +10,110 @@ import java.util.List;
 
 @Data
 public class RawTransactionInfo {
-  @JSONField(name = "hex")
+  @JSONField(alternateNames = "hex")
   private String hex;
 
-  @JSONField(name = "txid")
+  @JSONField(alternateNames = "txid")
   private String hash;
 
-  @JSONField(name = "size")
+  @JSONField(alternateNames = "size")
   private Long size;
 
-  @JSONField(name = "version")
+  @JSONField(alternateNames = "version")
   private Long version;
 
-  @JSONField(name = "locktime")
+  @JSONField(alternateNames = "locktime")
   private Long lockTime;
 
-  @JSONField(name = "vin")
+  @JSONField(alternateNames = "vin")
   private List<Vin> vin;
 
-  @JSONField(name = "vout")
+  @JSONField(alternateNames = "vout")
   private List<Vout> vout;
 
-  @JSONField(name = "blockhash")
+  @JSONField(alternateNames = "blockhash")
   private String blockHash;
 
-  @JSONField(name = "height")
+  @JSONField(alternateNames = "height")
   private BigInteger height;
 
-  @JSONField(name = "confirmations")
+  @JSONField(alternateNames = "confirmations")
   private Long confirmations;
 
-  @JSONField(name = "time", format = "unixtime")
+  @JSONField(alternateNames = "time", format = "unixtime")
   private Date time;
 
-  @JSONField(name = "blocktime", format = "unixtime")
+  @JSONField(alternateNames = "blocktime", format = "unixtime")
   private Date blockTime;
 
   @Data
   public class Vin {
-    @JSONField(name = "txid")
+    @JSONField(alternateNames = "txid")
     private String hash;
 
-    @JSONField(name = "vout")
+    @JSONField(alternateNames = "vout")
     private Integer vout;
 
-    @JSONField(name = "scriptSig")
+    @JSONField(alternateNames = "scriptSig")
     private ScriptSig scriptSig;
 
-    @JSONField(name = "value")
+    @JSONField(alternateNames = "value")
     private BigDecimal value;
 
-    @JSONField(name = "valueSat")
+    @JSONField(alternateNames = "valueSat")
     private BigInteger valueSat;
 
-    @JSONField(name = "sequence")
+    @JSONField(alternateNames = "sequence")
     private Long sequence;
 
     @Data
     public class ScriptSig {
-      @JSONField(name = "asm")
+      @JSONField(alternateNames = "asm")
       private String asm;
 
-      @JSONField(name = "hex")
+      @JSONField(alternateNames = "hex")
       private String hex;
     }
   }
 
   @Data
   public class Vout {
-    @JSONField(name = "value")
+    @JSONField(alternateNames = "value")
     private BigDecimal value;
 
-    @JSONField(name = "valueSat")
+    @JSONField(alternateNames = "valueSat")
     private BigInteger valueSat;
 
-    @JSONField(name = "n")
+    @JSONField(alternateNames = "n")
     private Integer n;
 
-    @JSONField(name = "scriptPubKey")
+    @JSONField(alternateNames = "scriptPubKey")
     private ScriptPubKey scriptPubKey;
 
-    @JSONField(name = "spentTxId")
+    @JSONField(alternateNames = "spentTxId")
     private String spentTxId;
 
-    @JSONField(name = "spentIndex")
+    @JSONField(alternateNames = "spentIndex")
     private Integer spentIndex;
 
-    @JSONField(name = "spentHeight")
+    @JSONField(alternateNames = "spentHeight")
     private Long spentHeight;
 
     @Data
     public class ScriptPubKey {
-      @JSONField(name = "asm")
+      @JSONField(alternateNames = "asm")
       private String asm;
 
-      @JSONField(name = "hex")
+      @JSONField(alternateNames = "hex")
       private String hex;
 
-      @JSONField(name = "reqSigs")
+      @JSONField(alternateNames = "reqSigs")
       private Integer reqSigs;
 
-      @JSONField(name = "type")
+      @JSONField(alternateNames = "type")
       private String type;
 
-      @JSONField(name = "addresses")
+      @JSONField(alternateNames = "addresses")
       private List<String> addresses;
     }
   }

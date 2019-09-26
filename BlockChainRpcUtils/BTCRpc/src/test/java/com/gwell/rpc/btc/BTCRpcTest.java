@@ -1,14 +1,18 @@
 package com.gwell.rpc.btc;
 
 import com.alibaba.fastjson.JSON;
+import com.gwell.rpc.btc.model.request.SendTransactionParams;
 import com.gwell.rpc.btc.model.response.GetInfo;
 import com.gwell.rpc.btc.model.response.ListAccounts;
+import com.gwell.rpc.btc.model.response.result.UTXOInfo;
+import com.gwell.rpc.common.model.BlockChainWallet;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.List;
 
 @RunWith(JUnit4.class)
 public class BTCRpcTest extends AbstractTest {
@@ -35,7 +39,7 @@ public class BTCRpcTest extends AbstractTest {
 
   @Test
   public void getAddressBalance() {
-    println(btcRpc.getAddressBalance("mwdXtp8ow61jcGuEXYVy5aZqksxvtrnNsL").getBalance());
+    println(btcRpc.getAddressBalance("mwHrmiQTgB88SypvSSFFt6gCzdo6NJ2Eh8").getBalance());
   }
 
   @Test
@@ -126,5 +130,28 @@ public class BTCRpcTest extends AbstractTest {
   @Test
   public void getAddressAllHash() {
     println(btcRpc.getAddressAllHash("mwdXtp8ow61jcGuEXYVy5aZqksxvtrnNsL").getHashList());
+  }
+
+  @Test
+  public void sendSignTransaction() {
+    String address = "n1tysbphwWvQYXf3ap2uN4ZQE5U9gVz5VV";
+    String privateKey = btcRpc.dumpPrivateKey(address).getPrivateKey();
+    BlockChainWallet wallet = new BlockChainWallet();
+    wallet.setAddress(address);
+    wallet.setPrivateKey(privateKey);
+
+    List<UTXOInfo> utxoList = btcRpc.getAddressUnspentOutputs(address).getUTXOList();
+    println(utxoList);
+    SendTransactionParams params = new SendTransactionParams();
+    params.setFromAccount(wallet);
+    params.setToAddress("2MyU89kfuCKtaNsrAB1R477rWrZVbaikwxc");
+    params.setTestNet(true);
+    params.setUTXOInfoList(utxoList);
+    params.setFee(new BigDecimal("0.0001"));
+    params.setAmount(new BigDecimal("0.0009"));
+    String signData = btcRpc.signTransaction(params);
+    System.out.println("signData = " + signData);
+
+    //    println(btcRpc.sendRawTransaction(signData));
   }
 }

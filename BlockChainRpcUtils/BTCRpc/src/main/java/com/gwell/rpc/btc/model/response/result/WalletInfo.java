@@ -8,48 +8,48 @@ import java.math.BigInteger;
 
 @Data
 public class WalletInfo {
-  @JSONField(name = "version", alternateNames = "版本")
+  @JSONField(alternateNames = "version")
   private Long version;
 
-  @JSONField(name = "protocolversion")
+  @JSONField(alternateNames = "protocolversion")
   private Long protocolVersion;
 
-  @JSONField(name = "walletversion")
+  @JSONField(alternateNames = "walletversion")
   private Long walletVersion;
 
-  @JSONField(name = "balance")
+  @JSONField(alternateNames = "balance")
   private BigDecimal balance;
 
-  @JSONField(name = "blocks")
+  @JSONField(alternateNames = "blocks")
   private BigInteger blocks;
 
-  @JSONField(name = "timeoffset")
+  @JSONField(alternateNames = "timeoffset")
   private Long timeOffset;
 
-  @JSONField(name = "connections")
+  @JSONField(alternateNames = "connections")
   private Long connections;
 
-  @JSONField(name = "proxy")
+  @JSONField(alternateNames = "proxy")
   private String proxy;
 
-  @JSONField(name = "difficulty")
+  @JSONField(alternateNames = "difficulty")
   private Double difficulty;
 
-  @JSONField(name = "testnet")
+  @JSONField(alternateNames = "testnet")
   private Boolean testNet;
 
-  @JSONField(name = "keypoololdest")
+  @JSONField(alternateNames = "keypoololdest")
   private Long keyPoolOldest;
 
-  @JSONField(name = "keypoolsize")
+  @JSONField(alternateNames = "keypoolsize")
   private Long keyPoolSize;
 
-  @JSONField(name = "paytxfee")
+  @JSONField(alternateNames = "paytxfee")
   private BigDecimal payTxFee;
 
-  @JSONField(name = "relayfee")
+  @JSONField(alternateNames = "relayfee")
   private BigDecimal relayFee;
 
-  @JSONField(name = "errors")
+  @JSONField(alternateNames = "errors")
   private String errors;
 }

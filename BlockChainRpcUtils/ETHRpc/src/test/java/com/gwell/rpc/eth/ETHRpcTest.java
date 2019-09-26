@@ -199,14 +199,15 @@ public class ETHRpcTest extends AbstractTest {
   @Test
   public void sendTransaction() {
     println(ethRpc.sendTransaction(sendEth(from, to.getAddress(), BigDecimal.ONE)));
-    println(ethRpc.sendTransaction(sendToken(from, to.getAddress(), BigDecimal.ONE, ethContractAddress)));
+    println(
+        ethRpc.sendTransaction(
+            sendToken(from, to.getAddress(), BigDecimal.ONE, ethContractAddress)));
   }
 
   @Test
   public void sendRawTransaction() {
-    String signData =
-        ethRpc.signTransaction(
-            sendToken(from, to.getAddress(), BigDecimal.ONE, ethContractAddress));
-    println(ethRpc.sendRawTransaction(signData));
+    String signData = ethRpc.signTransaction(sendEth(to, from.getAddress(), BigDecimal.ONE));
+    System.out.println(signData);
+    //    println(ethRpc.sendRawTransaction(signData));
   }
 }

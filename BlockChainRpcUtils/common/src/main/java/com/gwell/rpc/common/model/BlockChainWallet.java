@@ -3,6 +3,9 @@ package com.gwell.rpc.common.model;
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 import lombok.SneakyThrows;
+import org.bitcoinj.core.DumpedPrivateKey;
+import org.bitcoinj.core.ECKey;
+import org.bitcoinj.core.NetworkParameters;
 import org.web3j.crypto.Credentials;
 import org.web3j.crypto.ECKeyPair;
 
@@ -29,6 +32,12 @@ public class BlockChainWallet {
     }
     ECKeyPair ecKeyPair = ECKeyPair.create(key);
     return ecKeyPair;
+  }
+
+  public static ECKey getECKey(String privateKey, NetworkParameters param) {
+    DumpedPrivateKey dumpedPrivateKey = DumpedPrivateKey.fromBase58(param, privateKey);
+    ECKey ecKey = dumpedPrivateKey.getKey();
+    return ecKey;
   }
 
   public static Credentials getCredentials(String privateKey) {

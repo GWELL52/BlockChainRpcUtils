@@ -14,24 +14,24 @@ import java.util.stream.Stream;
 
 @Getter
 public enum BlockChainEnum {
-  BTC(BigDecimal.TEN.pow(8), 0, MainNetParams.get(), 1, TestNet3Params.get()),
-  ETH(BigDecimal.TEN.pow(18), 60, null, 60, null),
-  BCH(BigDecimal.TEN.pow(8), 145, MainNetParams.get(), 145, TestNet3Params.get()),
-  DASH(BigDecimal.TEN.pow(8), 5, DashMainNetParams.get(), 1, DashTestNet3Params.get()),
-  LTC(BigDecimal.TEN.pow(8), 2, LitecoinMainNetParams.get(), 1, LitecoinTestNet3Params.get()),
-  OMNI(BigDecimal.TEN.pow(8), 200, MainNetParams.get(), 200, TestNet3Params.get()),
-  ETC(BigDecimal.TEN.pow(18), 61, null, 61, null),
-  VNS(BigDecimal.TEN.pow(18), 316, null, 316, null),
+  BTC(8, 0, MainNetParams.get(), 1, TestNet3Params.get()),
+  ETH(18, 60, null, 60, null),
+  BCH(8, 145, MainNetParams.get(), 145, TestNet3Params.get()),
+  DASH(8, 5, DashMainNetParams.get(), 1, DashTestNet3Params.get()),
+  LTC(8, 2, LitecoinMainNetParams.get(), 1, LitecoinTestNet3Params.get()),
+  OMNI(8, 200, MainNetParams.get(), 200, TestNet3Params.get()),
+  ETC(18, 61, null, 61, null),
+  VNS(18, 316, null, 316, null),
   ;
 
-  private BigDecimal decimal;
+  private int decimal;
   private int coinType;
   private NetworkParameters mainNetParam;
   private int testNetCoinType;
   private NetworkParameters testNetParam;
 
   BlockChainEnum(
-      BigDecimal decimal,
+      int decimal,
       int coinType,
       NetworkParameters mainNetParam,
       int testNetCoinType,
@@ -45,6 +45,10 @@ public enum BlockChainEnum {
 
   public String lowerCaseName() {
     return name().toLowerCase();
+  }
+
+  public BigDecimal getUnit() {
+    return BigDecimal.TEN.pow(decimal);
   }
 
   public String getBip44Path(boolean testNet) {

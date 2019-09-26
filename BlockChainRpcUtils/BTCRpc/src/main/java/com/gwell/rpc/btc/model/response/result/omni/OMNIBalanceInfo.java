@@ -7,8 +7,9 @@ import java.math.BigDecimal;
 
 @Data
 public class OMNIBalanceInfo {
-  @JSONField(name = "propertyid")
+  @JSONField(alternateNames = "propertyid")
   private Integer propertyId;
+
   private String name;
   private BigDecimal balance;
   private BigDecimal reserved;

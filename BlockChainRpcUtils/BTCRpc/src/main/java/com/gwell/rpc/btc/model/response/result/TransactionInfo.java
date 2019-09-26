@@ -10,75 +10,75 @@ import java.util.List;
 
 @Data
 public class TransactionInfo {
-  @JSONField(name = "account")
+  @JSONField(alternateNames = "account")
   private String account;
 
-  @JSONField(name = "address")
+  @JSONField(alternateNames = "address")
   private String address;
 
-  @JSONField(name = "category")
+  @JSONField(alternateNames = "category")
   private String category;
 
-  @JSONField(name = "amount")
+  @JSONField(alternateNames = "amount")
   private BigDecimal amount;
 
-  @JSONField(name = "label")
+  @JSONField(alternateNames = "label")
   private String label;
 
-  @JSONField(name = "vout")
+  @JSONField(alternateNames = "vout")
   private Integer vout;
 
-  @JSONField(name = "confirmations")
+  @JSONField(alternateNames = "confirmations")
   private Long confirmations;
 
-  @JSONField(name = "blockhash")
+  @JSONField(alternateNames = "blockhash")
   private String blockHash;
 
-  @JSONField(name = "blockindex")
+  @JSONField(alternateNames = "blockindex")
   private BigInteger blockNumber;
 
-  @JSONField(name = "blocktime", format = "unixtime")
+  @JSONField(alternateNames = "blocktime", format = "unixtime")
   private Date blockTime;
 
-  @JSONField(name = "txid")
+  @JSONField(alternateNames = "txid")
   private String txHash;
 
-  @JSONField(name = "walletconflicts")
+  @JSONField(alternateNames = "walletconflicts")
   private List<String> walletConflicts;
 
-  @JSONField(name = "time", format = "unixtime")
+  @JSONField(alternateNames = "time", format = "unixtime")
   private Date time;
 
-  @JSONField(name = "timereceived", format = "unixtime")
+  @JSONField(alternateNames = "timereceived", format = "unixtime")
   private Date timeReceived;
 
-  @JSONField(name = "bip125-replaceable")
+  @JSONField(alternateNames = "bip125-replaceable")
   private String bip125Replaceable;
 
-  @JSONField(name = "details")
+  @JSONField(alternateNames = "details")
   private List<Details> details;
 
-  @JSONField(name = "hex")
+  @JSONField(alternateNames = "hex")
   private String hex;
 
   @Data
   public class Details {
-    @JSONField(name = "account")
+    @JSONField(alternateNames = "account")
     private String account;
 
-    @JSONField(name = "address")
+    @JSONField(alternateNames = "address")
     private String address;
 
-    @JSONField(name = "category")
+    @JSONField(alternateNames = "category")
     private String category;
 
-    @JSONField(name = "amount")
+    @JSONField(alternateNames = "amount")
     private BigDecimal amount;
 
-    @JSONField(name = "label")
+    @JSONField(alternateNames = "label")
     private String label;
 
-    @JSONField(name = "vout")
+    @JSONField(alternateNames = "vout")
     private Integer vout;
   }
 }

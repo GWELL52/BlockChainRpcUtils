@@ -7,10 +7,10 @@ import java.math.BigDecimal;
 
 @Data
 public class BalanceInfo {
-  private BigDecimal balance;
+  private BigDecimal rawBalance;
   private BigDecimal received;
 
-  public BigDecimal getBalance() {
-    return balance.divide(BlockChainEnum.BTC.getDecimal());
+  public BigDecimal getBalance(BlockChainEnum chainEnum) {
+    return rawBalance.divide(chainEnum.getUnit(), chainEnum.getDecimal(), BigDecimal.ROUND_DOWN);
   }
 }

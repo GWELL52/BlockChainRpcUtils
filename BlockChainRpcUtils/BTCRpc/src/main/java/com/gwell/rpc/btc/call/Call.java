@@ -1,6 +1,7 @@
 package com.gwell.rpc.btc.call;
 
 import com.gwell.rpc.btc.call.method.*;
+import com.gwell.rpc.btc.model.request.SendTransactionParams;
 import com.gwell.rpc.btc.model.response.*;
 import com.gwell.rpc.common.enums.BlockChainEnum;
 import com.gwell.rpc.common.model.Connection;
@@ -93,5 +94,13 @@ public class Call {
 
   public GetAddressAllHash getAddressAllHash(String address) {
     return transactionInfoMethod.getAddressAllHash(address);
+  }
+
+  public String signTransaction(SendTransactionParams params) {
+    return transferMethod.signTransaction(params);
+  }
+
+  public DumpPrivateKey dumpPrivateKey(String address) {
+    return accountMethod.dumpPrivateKey(address);
   }
 }

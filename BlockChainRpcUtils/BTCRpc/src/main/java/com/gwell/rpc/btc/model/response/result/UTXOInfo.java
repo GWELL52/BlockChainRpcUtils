@@ -1,27 +1,34 @@
 package com.gwell.rpc.btc.model.response.result;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.gwell.rpc.common.enums.BlockChainEnum;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 
 @Data
 public class UTXOInfo {
-  @JSONField(name = "address")
+  @JSONField(alternateNames = "address")
   private String address;
 
-  @JSONField(name = "txid")
+  @JSONField(alternateNames = "txid")
   private String hash;
 
-  @JSONField(name = "outputIndex")
+  @JSONField(alternateNames = "outputIndex")
   private Integer outputIndex;
 
-  @JSONField(name = "script")
+  @JSONField(alternateNames = "script")
   private String script;
 
-  @JSONField(name = "satoshis")
-  private Long satoshis;
+  @JSONField(alternateNames = "satoshis")
+  private Long rawValue;
 
-  @JSONField(name = "height")
+  @JSONField(alternateNames = "height")
   private BigInteger height;
+
+  public BigDecimal getValue(BlockChainEnum chainEnum) {
+    return BigDecimal.valueOf(rawValue)
+        .divide(chainEnum.getUnit(), chainEnum.getDecimal(), BigDecimal.ROUND_DOWN);
+  }
 }

@@ -7,8 +7,6 @@ import lombok.SneakyThrows;
 import org.bitcoinj.core.ECKey;
 import org.bitcoinj.core.NetworkParameters;
 import org.bitcoinj.crypto.*;
-import org.bitcoinj.wallet.Wallet;
-import org.bitcoinj.wallet.WalletFiles;
 import org.web3j.crypto.ECKeyPair;
 import org.web3j.crypto.Keys;
 import org.web3j.crypto.MnemonicUtils;
@@ -26,7 +24,7 @@ public class Bip44WalletUtil {
   /** 生成钱包 */
   @SneakyThrows
   public static BlockChainWallet generateBip44Wallet(
-      BlockChainEnum chainEnum, String password, String keystorePath, boolean testNet) {
+      BlockChainEnum chainEnum, String keystorePath, boolean testNet) {
     File dir = getKeystoreDir(keystorePath);
     byte[] initialEntropy = new byte[16];
     SecureRandomUtils.secureRandom().nextBytes(initialEntropy);
@@ -59,7 +57,6 @@ public class Bip44WalletUtil {
       throw new RuntimeException("暂不支持该币种");
     }
     wallet.setMnemonic(mnemonic);
-    wallet.setPassword(password);
     return wallet;
   }
 
@@ -85,7 +82,6 @@ public class Bip44WalletUtil {
   /** 创建Keystore文件 */
   @SneakyThrows
   private static void createKeystoreFile(File dir, WalletFile walletFile) {
-   wall
     String address =
         new StringBuffer(walletFile.getAddress()).insert(0, "0x").toString().toLowerCase();
     // 生成 keystore 文件名
@@ -113,6 +109,6 @@ public class Bip44WalletUtil {
   }
 
   public static void main(String[] args) {
-    generateBip44Wallet(BlockChainEnum.LTC, "123456", "/keystore", false);
+    generateBip44Wallet(BlockChainEnum.LTC, "/keystore", false);
   }
 }

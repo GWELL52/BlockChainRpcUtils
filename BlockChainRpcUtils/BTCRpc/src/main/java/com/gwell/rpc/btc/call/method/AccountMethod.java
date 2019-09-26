@@ -1,5 +1,6 @@
 package com.gwell.rpc.btc.call.method;
 
+import com.gwell.rpc.btc.model.response.DumpPrivateKey;
 import com.gwell.rpc.btc.model.response.GetAddresses;
 import com.gwell.rpc.btc.model.response.GetNewAddress;
 import com.gwell.rpc.btc.model.response.ListAccounts;
@@ -51,4 +52,10 @@ public class AccountMethod extends SuperMethod {
     return Request.rpc(connection, "listaccounts", null, ListAccounts.class).send();
   }
 
+  /** 获取钱包中地址的私钥 */
+  public DumpPrivateKey dumpPrivateKey(String address) {
+    return Request.rpc(
+            connection, "dumpprivkey", Collections.singletonList(address), DumpPrivateKey.class)
+        .send();
+  }
 }

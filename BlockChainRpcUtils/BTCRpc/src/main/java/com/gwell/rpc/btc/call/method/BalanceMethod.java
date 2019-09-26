@@ -41,12 +41,15 @@ public class BalanceMethod extends SuperMethod {
    * @param address 地址
    */
   public GetAddressBalance getAddressBalance(@NonNull String address) {
-    return Request.rpc(
-            connection,
-            "getaddressbalance",
-            Collections.singletonList(address),
-            GetAddressBalance.class)
-        .send();
+    GetAddressBalance result =
+        Request.rpc(
+                connection,
+                "getaddressbalance",
+                Collections.singletonList(address),
+                GetAddressBalance.class)
+            .send();
+    result.setChain(blockChain);
+    return result;
   }
 
   /**
