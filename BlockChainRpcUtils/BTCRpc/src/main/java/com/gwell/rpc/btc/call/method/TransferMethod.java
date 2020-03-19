@@ -80,9 +80,7 @@ public class TransferMethod extends SuperMethod {
       //      throw new RuntimeException("余额不足");
     }
     List<UTXO> UTXOList =
-        params
-            .getUTXOInfoList()
-            .stream()
+        params.getUTXOInfoList().stream()
             .map(
                 UTXOInfo -> {
                   UTXO UTXO =
@@ -110,6 +108,17 @@ public class TransferMethod extends SuperMethod {
     tx.setPurpose(Transaction.Purpose.USER_PAYMENT);
 
     log.info("=== [BTC] sign success,hash is :{} ===", tx.getHashAsString());
-    return Hex.toHexString(tx.bitcoinSerialize());
+
+    // 这是签名之后的原始交易，直接去广播就行了
+    String signedHex = Hex.toHexString(tx.bitcoinSerialize());
+    log.info("=== [BTC] sign success,signedHex is :{} ===", signedHex);
+
+    // 这是交易的hash
+    String txHash =
+        Hex.toHexString(
+            Utils.reverseBytes(Sha256Hash.hash(Sha256Hash.hash(tx.bitcoinSerialize()))));
+    log.info("=== [BTC] sign success,txHash is :{} ===", txHash);
+
+    return signedHex;
   }
 }

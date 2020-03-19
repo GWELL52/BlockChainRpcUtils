@@ -42,7 +42,8 @@ public class Response<T> {
     }
   }
 
-  public static <S extends Response> S success(okhttp3.Response response, Class<S> responseType) {
+  public static <S extends Response<?>> S success(
+      okhttp3.Response response, Class<S> responseType) {
     S result;
     try {
       result = responseType.newInstance();
@@ -73,7 +74,7 @@ public class Response<T> {
     return result;
   }
 
-  public static <S extends Response> S fail(Exception e, Class<S> responseType) {
+  public static <S extends Response<?>> S fail(Exception e, Class<S> responseType) {
     S result;
     try {
       result = responseType.newInstance();
@@ -87,7 +88,7 @@ public class Response<T> {
     return result;
   }
 
-  public static <S extends Response> S timeOut(Class<S> responseType) {
+  public static <S extends Response<?>> S timeOut(Class<S> responseType) {
     S result;
     try {
       result = responseType.newInstance();

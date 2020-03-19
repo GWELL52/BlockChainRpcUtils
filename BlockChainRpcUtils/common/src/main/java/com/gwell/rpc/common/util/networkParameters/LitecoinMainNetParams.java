@@ -8,6 +8,7 @@ import org.bitcoinj.params.AbstractBitcoinNetParams;
  * @implNote dumpedPrivateKeyHeader = wif
  * @implNote addressHeader = pubKeyHash
  * @implNote p2shHeader = scriptHash
+ * @implNote bip32HeaderPub = bip32.public
  * @implNote bip32HeaderPriv = bip32.private
  */
 public class LitecoinMainNetParams extends AbstractBitcoinNetParams {
@@ -15,10 +16,11 @@ public class LitecoinMainNetParams extends AbstractBitcoinNetParams {
 
   public LitecoinMainNetParams() {
     super();
-    dumpedPrivateKeyHeader = 176;
-    addressHeader = 48;
-    p2shHeader = 5;
-    bip32HeaderPriv = 0x0488ADE4;
+    dumpedPrivateKeyHeader = 0xb0;
+    addressHeader = 0x30;
+    p2shHeader = 0x32;
+    bip32HeaderPriv = 0x0488ade4;
+    bip32HeaderPub = 0x0488b21e;
   }
 
   @SuppressWarnings("PMD.AvoidSynchronizedAtMethodLevel")
