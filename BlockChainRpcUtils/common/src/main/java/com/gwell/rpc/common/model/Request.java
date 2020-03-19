@@ -110,7 +110,7 @@ public class Request<T extends Response<?>> {
     }
   }
 
-  private HttpUrl getUrl(Request<? extends Response<?>> request) {
+  private HttpUrl getUrl(Request<T> request) {
     HttpUrl.Builder builder = connection.getUrlBuilder();
     if (request.getPathSegments() != null && request.getPathSegments().size() > 0) {
       request.getPathSegments().forEach(builder::addPathSegment);
@@ -127,7 +127,7 @@ public class Request<T extends Response<?>> {
     return builder.build();
   }
 
-  private okhttp3.Request getHttpRequest(Request<? extends Response<?>> request) {
+  private okhttp3.Request getHttpRequest(Request<T> request) {
     okhttp3.Request.Builder requestBuilder = new okhttp3.Request.Builder().url(getUrl(request));
     if (request.isPost()) {
       if (request.isFormData()) {
